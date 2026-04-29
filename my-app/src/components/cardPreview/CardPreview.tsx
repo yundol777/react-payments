@@ -1,4 +1,4 @@
-import CardBrandImage from '../CardBrandImage/CardBrandImage';
+import CardBrandImage from './cardBrandImage/CardBrandImage';
 
 interface Props {
   cardNumber: string[];

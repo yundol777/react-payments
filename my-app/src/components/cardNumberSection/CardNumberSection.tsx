@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import isInputValidate from '../../utils/Validation';
-import CommonSection from '../CommonSection/CommonSection';
-import NumberInput from '../NumberInput/NumberInput';
+import CommonSection from '../common/commonSection/CommonSection';
+import NumberInput from '../common/numberInput/NumberInput';
 
 interface Props {
   value: string[];
@@ -8,12 +9,22 @@ interface Props {
 }
 
 export default function CardNumberSection({ value, setValue }: Props) {
+  const [error, setError] = useState<boolean[]>([false, false, false, false]);
+  const [errorMessage, setErrorMessage] = useState("");
   function handleOnChange(inputValue: string, index: number) {
     if(!isInputValidate(inputValue, 4)) return;
 
     const newValue = [...value];
     newValue[index] = inputValue;
     setValue(newValue);
+  }
+
+  function handleOnBlur(index: number) {
+    // 에러체크
+    // 조건 걸고 조건마다 setErrorMessage('원하는 텍스트');
+    // newError = [...error]
+    // newError[index] = value.length < 4 && value.length > 0; // checkError()
+    // setError(newError);
   }
 
   return (
@@ -29,6 +40,7 @@ export default function CardNumberSection({ value, setValue }: Props) {
           value={num}
           onChange={(v) => handleOnChange(v, index)}
           placeholder="1234"
+          // error={error[index]}
         />
       ))}
     </CommonSection>

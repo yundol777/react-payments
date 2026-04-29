@@ -1,5 +1,5 @@
-import MasterCard from "../../assets/Mastercard.png";
-import Visa from "../../assets/Visa.png";
+import MasterCard from "../../../assets/Mastercard.png";
+import Visa from "../../../assets/Visa.png";
 
 interface Props {
     cardNumber: string,
