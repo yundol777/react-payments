@@ -1,4 +1,5 @@
-import isInputValidate from '../../utils/Validation';
+import { useState } from 'react';
+import { isInputValidate, isValidRange } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 
@@ -8,10 +9,20 @@ interface Props {
 }
 
 export default function CvcSection({ value, setValue }: Props) {
-  function handleCvcOnChange(inputValue: string) {
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  function handleOnChange(inputValue: string) {
     if(!isInputValidate(inputValue, 3)) return;
 
     setValue(inputValue);
+  }
+
+  function handleOnBlur(inputValue: string) {
+    if(!isValidRange(inputValue, 3)) { 
+      setError(true);
+      setErrorMessage('필요한 자릿수를 모두 입력해주세요!');
+    }
   }
 
   return (
@@ -19,12 +30,14 @@ export default function CvcSection({ value, setValue }: Props) {
       title="CVC 번호를 입력해주세요"
       description=""
       label="CVC"
-      errorMessage="숫자만 입력 가능합니다."
+      errorMessage={errorMessage}
     >
       <NumberInput
         value={value}
-        onChange={handleCvcOnChange}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
         placeholder="123"
+        isError={error}
       />
     </CommonSection>
   );
