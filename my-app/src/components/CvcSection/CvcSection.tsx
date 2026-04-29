@@ -1,3 +1,4 @@
+import isInputValidate from '../../utils/Validation';
 import CommonSection from '../CommonSection/CommonSection';
 import NumberInput from '../NumberInput/NumberInput';
 
@@ -7,6 +8,12 @@ interface Props {
 }
 
 export default function CvcSection({ value, setValue }: Props) {
+  function handleCvcOnChange(inputValue: string) {
+    if(!isInputValidate(inputValue, 3)) return;
+
+    setValue(inputValue);
+  }
+
   return (
     <CommonSection
       title="CVC 번호를 입력해주세요"
@@ -16,9 +23,8 @@ export default function CvcSection({ value, setValue }: Props) {
     >
       <NumberInput
         value={value}
-        setValue={setValue}
+        onChange={handleCvcOnChange}
         placeholder="123"
-        maxLength={3}
       />
     </CommonSection>
   );

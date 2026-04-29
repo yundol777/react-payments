@@ -1,22 +1,16 @@
-import isWithinMaxLength from '../../utils/Validation';
-
 interface Props {
   value: string;
-  setValue: (value: string)=>void;
+  onChange: (value:string)=>void;
   placeholder: string;
-  maxLength: number;
 }
 
-export default function NumberInput({ value, setValue, placeholder, maxLength }: Props) {
+export default function NumberInput({ value, onChange, placeholder }: Props) {
 
   return (
     <input
       type="number"
       value={value}
-      onChange={(e) => {
-        if(!isWithinMaxLength(e.target.value, maxLength)) return;
-        setValue(e.target.value);
-      }}
+      onChange={(e)=>onChange(e.target.value)}
       placeholder={placeholder}
     />
   );
