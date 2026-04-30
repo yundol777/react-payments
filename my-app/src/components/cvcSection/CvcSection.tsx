@@ -22,6 +22,9 @@ export default function CvcSection({ value, setValue }: Props) {
     if(!isValidRange(inputValue, 3)) { 
       setError(true);
       setErrorMessage('필요한 자릿수를 모두 입력해주세요!');
+    } else {
+      setError(false);
+      setErrorMessage('');
     }
   }
 

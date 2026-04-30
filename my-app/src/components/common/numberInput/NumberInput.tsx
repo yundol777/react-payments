@@ -1,3 +1,5 @@
+import { StyledInput } from "./NumberInput.styles";
+
 interface Props {
   value: string;
   onChange: (value:string)=>void;
@@ -9,12 +11,14 @@ interface Props {
 export default function NumberInput({ value, onChange, onBlur, placeholder, isError }: Props) {
 
   return (
-    <input
-      type="number"
+    <StyledInput
+      type="text"
+      inputMode="numeric"
       value={value}
       onChange={(e)=>onChange(e.target.value)}
       onBlur={(e)=>onBlur(e.target.value)}
       placeholder={placeholder}
+      isError={isError}
     />
   );
 }
