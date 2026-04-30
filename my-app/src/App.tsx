@@ -3,6 +3,7 @@ import CardPreview from "./components/cardPreview/CardPreview";
 import CardNumberSection from "./components/cardNumberSection/CardNumberSection";
 import ExpirationDateSection from "./components/expirationDateSection/ExpirationDateSection";
 import CvcSection from "./components/cvcSection/CvcSection";
+import { AppContainer, FormLayout } from "./App.styles";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -10,14 +11,14 @@ function App() {
   const [cvc, setCvc] = useState('');
 
   return (
-    <div>
+    <AppContainer>
       <CardPreview cardNumber={cardNumber} expirationDate={expirationDate} />
-      <form> /* input group div */
+      <FormLayout>
         <CardNumberSection value={cardNumber} setValue = {setCardNumber} />
         <ExpirationDateSection value={expirationDate} setValue={setExpirationDate} />
         <CvcSection value={cvc} setValue={setCvc} />
-      </form>
-    </div>
+      </FormLayout>
+    </AppContainer>
   );
 }
 

@@ -23,12 +23,12 @@ export default function CardNumberSection({ value, setValue }: Props) {
   function handleOnBlur(inputValue:string, index: number) {
     const newError = [...errors];
 
-    if (isValidRange(inputValue, 4)) {
+    if (!isValidRange(inputValue, 4)) {
       newError[index] = true;
       setErrorMessage('필요한 자릿수를 모두 입력해주세요!'); 
     } else {
       newError[index] = false;
-      setErrorMessage('');
+      if(!newError.some((error) => error)) setErrorMessage('');
     }
 
     setErrors(newError);

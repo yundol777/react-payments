@@ -1,4 +1,12 @@
 import CardBrandImage from './cardBrandImage/CardBrandImage';
+import {
+  CardChip,
+  CardContainer,
+  CardExpirationDate,
+  CardHeader,
+  CardNumber,
+} from './CardPreview.styles';
+import EachCardNumber from './eachCardNumber/EachCardNumber';
 
 interface Props {
   cardNumber: string[];
@@ -6,29 +14,18 @@ interface Props {
 }
 
 export default function CardPreview({ cardNumber, expirationDate }: Props) {
-  const maskingCardNumber = cardNumber.map((num, index) => {
-    if (index >= 2) {
-        return '*'.repeat(num.length);
-    }
-    return num;
-  })
-
   return (
-    <div>
-      <div>
-        <div></div> /* 카드 칩 */
-        <CardBrandImage cardNumber={cardNumber[0]} /> /* 카드브랜드 이미지 */
-      </div>
-      <div>
-        {maskingCardNumber[0]}
-        {maskingCardNumber[1]}
-        {maskingCardNumber[2]}
-        {maskingCardNumber[3]}
-      </div>
-      /* 카드넘버 */
-      <div>
-        {expirationDate.month}/{expirationDate.year}
-      </div> /* 유효기간 */
-    </div>
+    <CardContainer>
+      <CardHeader>
+        <CardChip />
+        <CardBrandImage cardNumber={cardNumber[0]} />
+      </CardHeader>
+      <CardNumber>
+        {cardNumber.map((number, index) => EachCardNumber(number, index))}
+      </CardNumber>
+      <CardExpirationDate>
+        {expirationDate.month || "MM"}/{expirationDate.year || "YY"}
+      </CardExpirationDate>
+    </CardContainer>
   );
 }

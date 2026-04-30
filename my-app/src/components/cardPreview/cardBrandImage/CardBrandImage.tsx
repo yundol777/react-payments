@@ -1,5 +1,6 @@
 import MasterCard from "../../../assets/Mastercard.png";
 import Visa from "../../../assets/Visa.png";
+import { EmptyImg, StyledImg } from "./CardBrandImage.styles";
 
 interface Props {
     cardNumber: string,
@@ -12,12 +13,12 @@ export default function CardBrandImage({cardNumber}: Props) {
     }
 
     if(cardNumber.slice(0,1)==="4") {
-        return <img src={Visa} alt="visa 로고 이미지" />
+        return <StyledImg src={Visa} alt="visa 로고 이미지" />
     }
 
     if(checkMasterCard()) {
-        return <img src={MasterCard} alt="mastercard 로고 이미지" />
+        return <StyledImg src={MasterCard} alt="mastercard 로고 이미지" />
     }
 
-    return <div />
+    return <EmptyImg />
 }
