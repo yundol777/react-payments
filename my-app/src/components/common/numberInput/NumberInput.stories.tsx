@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import NumberInput from './NumberInput';
 
 const meta: Meta<typeof NumberInput> = {
@@ -18,12 +18,6 @@ export const First: Story = {
   render: (args) => {
     const [value, setValue] = useState('');
 
-    return (
-      <NumberInput 
-        {...args} 
-        value={value} 
-        onChange={setValue} 
-      />
-    );
+    return <NumberInput {...args} value={value} onChange={setValue} />;
   },
 };

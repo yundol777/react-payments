@@ -1,5 +1,5 @@
-import  { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import CvcSection from './CvcSection';
 
 const meta: Meta<typeof CvcSection> = {
@@ -15,11 +15,6 @@ export const Second: Story = {
   render: () => {
     const [value, setValue] = useState('');
 
-    return (
-      <CvcSection 
-        value={value} 
-        setValue={setValue} 
-      />
-    );
+    return <CvcSection value={value} setValue={setValue} />;
   },
 };

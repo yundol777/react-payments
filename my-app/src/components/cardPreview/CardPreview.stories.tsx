@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import CardPreview from './CardPreview';
 
 const meta: Meta<typeof CardPreview> = {
@@ -24,7 +24,7 @@ export const Visa: Story = {
   },
 };
 
-// 빈 카드 상태 
+// 빈 카드 상태
 export const Empty: Story = {
   args: {
     cardNumber: ['', '', '', ''],

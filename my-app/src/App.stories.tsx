@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within, expect } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { userEvent, within, expect } from 'storybook/test';
 import App from './App';
 
 const meta: Meta<typeof App> = {
@@ -53,10 +53,10 @@ export const ErrorValidationScenario: Story = {
     const cardInputs = canvas.getAllByPlaceholderText('1234');
     await userEvent.type(cardInputs[0], '12'); // 4자리가 아닌 2자리만 입력
     await userEvent.click(canvasElement); // 포커스 해제 (onBlur)
-    
+
     // 에러 메시지가 화면에 나타났는지 검증
     await expect(
-      canvas.getByText('필요한 자릿수를 모두 입력해주세요!')
+      canvas.getByText('필요한 자릿수를 모두 입력해주세요!'),
     ).toBeInTheDocument();
 
     // 유효기간 '월' 에러 테스트 (00월 입력)
@@ -66,7 +66,7 @@ export const ErrorValidationScenario: Story = {
 
     // 에러 메시지가 화면에 나타났는지 검증
     await expect(
-      canvas.getByText('월은 1월부터 12월 사이여야 합니다!')
+      canvas.getByText('월은 1월부터 12월 사이여야 합니다!'),
     ).toBeInTheDocument();
 
     // CVC 자릿수 부족 에러 테스트
@@ -75,7 +75,9 @@ export const ErrorValidationScenario: Story = {
     await userEvent.click(canvasElement);
 
     // CVC 쪽 에러 메시지 검증
-    const lengthErrors = canvas.getAllByText('필요한 자릿수를 모두 입력해주세요!');
+    const lengthErrors = canvas.getAllByText(
+      '필요한 자릿수를 모두 입력해주세요!',
+    );
     await expect(lengthErrors.length).toBeGreaterThanOrEqual(2);
   },
 };
