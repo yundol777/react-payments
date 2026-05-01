@@ -1,10 +1,19 @@
-import { Container, Description, Error, Header, InputGroup, InputSection, Label, Title } from "./CommonSection.styles";
+import {
+  Container,
+  Description,
+  Error,
+  Header,
+  InputGroup,
+  InputSection,
+  Label,
+  Title,
+} from './CommonSection.styles';
 
 interface Props {
   title: string;
   description: string;
   label: string;
-  children: any;
+  children: React.ReactNode;
   errorMessage: string;
 }
 
