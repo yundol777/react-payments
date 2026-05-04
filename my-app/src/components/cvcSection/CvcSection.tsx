@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isExactLength, isInputValidate } from '../../utils/Validation';
+import { getCvcErrorMessage, isInputValidate } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 
@@ -19,13 +19,10 @@ export default function CvcSection({ value, setValue }: Props) {
   }
 
   function handleOnBlur(inputValue: string) {
-    if (!isExactLength(inputValue, 3)) {
-      setError(true);
-      setErrorMessage('필요한 자릿수를 모두 입력해주세요!');
-    } else {
-      setError(false);
-      setErrorMessage('');
-    }
+    const inputErrorMessage = getCvcErrorMessage(inputValue);
+
+    setError(inputErrorMessage !== '');
+    setErrorMessage(inputErrorMessage);
   }
 
   return (
