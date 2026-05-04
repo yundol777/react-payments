@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isInputValidate, isValidRange } from '../../utils/Validation';
+import { isExactLength, isInputValidate } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 
@@ -20,20 +20,19 @@ export default function CardNumberSection({ value, setValue }: Props) {
     setValue(newValue);
   }
 
-  function handleOnBlur(inputValue:string, index: number) {
+  function handleOnBlur(inputValue: string, index: number) {
     const newError = [...errors];
 
-    if (!isValidRange(inputValue, 4)) {
+    if (!isExactLength(inputValue, 4)) {
       newError[index] = true;
-      setErrorMessage('필요한 자릿수를 모두 입력해주세요!'); 
+      setErrorMessage('필요한 자릿수를 모두 입력해주세요!');
     } else {
       newError[index] = false;
-      if(!newError.some((error) => error)) setErrorMessage('');
+      if (!newError.some((error) => error)) setErrorMessage('');
     }
 
     setErrors(newError);
-    }
-  
+  }
 
   return (
     <CommonSection
@@ -47,7 +46,7 @@ export default function CardNumberSection({ value, setValue }: Props) {
           key={index}
           value={num}
           onChange={(v) => handleOnChange(v, index)}
-          onBlur={(v)=>handleOnBlur(v, index)}
+          onBlur={(v) => handleOnBlur(v, index)}
           placeholder="1234"
           isError={errors[index]}
         />
@@ -55,4 +54,3 @@ export default function CardNumberSection({ value, setValue }: Props) {
     </CommonSection>
   );
 }
-
