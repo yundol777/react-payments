@@ -14,6 +14,14 @@ export function getCardNumberErrorMessage(cardNumber: string): string {
   return '';
 }
 
+export function getPasswordErrorMessage(password: string): string {
+  if (!isExactLength(password, 2)) {
+    return '비밀번호는 2자리로 입력해주세요.';
+  }
+
+  return '';
+}
+
 export function getCvcErrorMessage(cvc: string): string {
   if (!isExactLength(cvc, 3)) {
     return 'CVC는 3자리로 입력해주세요.';
