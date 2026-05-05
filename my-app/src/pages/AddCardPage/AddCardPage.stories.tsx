@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { userEvent, within, expect } from 'storybook/test';
-import App from './App';
+import AddCardPage from './AddCardPage';
 
-const meta: Meta<typeof App> = {
+const meta: Meta<typeof AddCardPage> = {
   title: 'Pages/PaymentApp',
-  component: App,
+  component: AddCardPage,
   parameters: {
     layout: 'fullscreen',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof App>;
+type Story = StoryObj<typeof AddCardPage>;
 
 // 빈 화면
 export const Default: Story = {};

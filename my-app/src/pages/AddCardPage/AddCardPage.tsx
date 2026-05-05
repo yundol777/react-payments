@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppContainer, FormLayout } from '../../App.styles';
+import { AppContainer, FormLayout } from './AddCardPage.styles';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import ExpirationDateSection from '../../components/ExpirationDateSection/ExpirationDateSection';
