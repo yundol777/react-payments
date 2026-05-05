@@ -1,4 +1,4 @@
-import CardBrandImage from './cardBrandImage/CardBrandImage';
+import CardBrandImage from './CardBrandImage/CardBrandImage';
 import {
   CardChip,
   CardContainer,
@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardNumber,
 } from './CardPreview.styles';
-import EachCardNumber from './eachCardNumber/EachCardNumber';
+import EachCardNumber from './EachCardNumber/EachCardNumber';
 
 interface Props {
   cardNumber: string[];

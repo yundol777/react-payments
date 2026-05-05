@@ -4,22 +4,25 @@ import CardPreview from '../../components/CardPreview/CardPreview';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import ExpirationDateSection from '../../components/ExpirationDateSection/ExpirationDateSection';
 import CvcSection from '../../components/CvcSection/CvcSection';
+import CardIssuerSection from '../../components/CardIssuerSection/CardIssuerSection';
 
 function AddCardPage() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
+  const [issuer, setIssuer] = useState('');
 
   return (
     <AppContainer>
       <CardPreview cardNumber={cardNumber} expirationDate={expirationDate} />
       <FormLayout>
-        <CardNumberSection value={cardNumber} setValue={setCardNumber} />
+        <CvcSection value={cvc} setValue={setCvc} />
         <ExpirationDateSection
           value={expirationDate}
           setValue={setExpirationDate}
         />
-        <CvcSection value={cvc} setValue={setCvc} />
+        <CardIssuerSection value={issuer} setValue={setIssuer} />
+        <CardNumberSection value={cardNumber} setValue={setCardNumber} />
       </FormLayout>
     </AppContainer>
   );

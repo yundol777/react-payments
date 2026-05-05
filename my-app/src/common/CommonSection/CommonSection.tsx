@@ -12,17 +12,17 @@ import {
 interface Props {
   title: string;
   description: string;
-  label: string;
+  label?: string;
   children: React.ReactNode;
-  errorMessage: string;
+  errorMessage?: string;
 }
 
 export default function CommonSection({
   title,
   description,
-  label,
+  label = '',
   children,
-  errorMessage,
+  errorMessage = '',
 }: Props) {
   return (
     <Container>
