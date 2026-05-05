@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getCvcErrorMessage, isInputValidate } from '../../utils/Validation';
-import CommonSection from '../common/commonSection/CommonSection';
-import NumberInput from '../common/numberInput/NumberInput';
+import CommonSection from '../../common/CommonSection/CommonSection';
+import NumberInput from '../../common/NumberInput/NumberInput';
 
 interface Props {
   value: string;
