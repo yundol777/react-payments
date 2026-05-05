@@ -13,9 +13,13 @@ export default function CvcSection({ value, setValue }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleOnChange(inputValue: string) {
-    if (!isInputValidate(inputValue, 3)) return;
+    if (!isInputValidate(inputValue, 3)) {
+      setErrorMessage('CVC는 숫자만 입력 가능합니다.');
+      return;
+    }
 
     setValue(inputValue);
+    setErrorMessage('');
   }
 
   function handleOnBlur(inputValue: string) {

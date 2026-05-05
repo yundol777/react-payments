@@ -16,11 +16,15 @@ export default function CardNumberSection({ value, setValue }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleOnChange(inputValue: string, index: number) {
-    if (!isInputValidate(inputValue, 4)) return;
+    if (!isInputValidate(inputValue, 4)) {
+      setErrorMessage('카드번호는 숫자만 입력 가능합니다.');
+      return;
+    }
 
     const newValue = [...value];
     newValue[index] = inputValue;
     setValue(newValue);
+    setErrorMessage('');
   }
 
   function handleOnBlur(inputValue: string, index: number) {

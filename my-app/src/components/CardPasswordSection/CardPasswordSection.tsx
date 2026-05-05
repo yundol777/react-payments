@@ -21,8 +21,8 @@ function CardPasswordSection({ value, setValue }: Props) {
       return;
     }
 
-    setErrorMessage('');
     setValue(inputValue);
+    setErrorMessage('');
   }
 
   function handleOnBlur(inputValue: string) {

@@ -20,10 +20,14 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleOnChange(inputValue: string, type: 'month' | 'year') {
-    if (!isInputValidate(inputValue, 2)) return;
+    if (!isInputValidate(inputValue, 2)) {
+      setErrorMessage('유효기간은 숫자만 입력 가능합니다.');
+      return;
+    }
 
     const newValue = { ...value, [type]: inputValue };
     setValue(newValue);
+    setErrorMessage('');
   }
 
   function handleOnBlur(inputValue: string, type: 'month' | 'year') {
