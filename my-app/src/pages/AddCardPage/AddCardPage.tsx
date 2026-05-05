@@ -10,18 +10,22 @@ function AddCardPage() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
-  const [issuer, setIssuer] = useState('');
+  const [cardIssuer, setCardIssuer] = useState('');
 
   return (
     <AppContainer>
-      <CardPreview cardNumber={cardNumber} expirationDate={expirationDate} />
+      <CardPreview
+        cardNumber={cardNumber}
+        expirationDate={expirationDate}
+        cardIssuer={cardIssuer}
+      />
       <FormLayout>
         <CvcSection value={cvc} setValue={setCvc} />
         <ExpirationDateSection
           value={expirationDate}
           setValue={setExpirationDate}
         />
-        <CardIssuerSection value={issuer} setValue={setIssuer} />
+        <CardIssuerSection value={cardIssuer} setValue={setCardIssuer} />
         <CardNumberSection value={cardNumber} setValue={setCardNumber} />
       </FormLayout>
     </AppContainer>

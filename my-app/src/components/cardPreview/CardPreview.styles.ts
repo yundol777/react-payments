@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ backgroundColor: string }>`
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 8px 12px;
   width: 212px;
   height: 132px;
-  background-color: #333333;
+  background-color: ${({ backgroundColor }) => backgroundColor};
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   box-sizing: border-box;
@@ -41,9 +41,9 @@ export const CardNumber = styled.div`
 `;
 
 export const CardExpirationDate = styled.div`
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 500;
-    padding: 0 5px;
-    letter-spacing: 1px;
+  padding: 0 5px;
+  letter-spacing: 1px;
 `;
