@@ -20,7 +20,12 @@ function AddCardPage() {
 
   function handleOnSubmit(e: React.SubmitEvent) {
     e.preventDefault();
-    navigate('/success');
+    navigate('/success', {
+      state: {
+        firstNumber: cardNumber[0],
+        issuer: cardIssuer,
+      },
+    });
   }
 
   return (
