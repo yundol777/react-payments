@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppContainer, FormLayout } from './AddCardPage.styles';
+import { StyledContainer, StyledForm } from './AddCardPage.styles';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import ExpirationDateSection from '../../components/ExpirationDateSection/ExpirationDateSection';
@@ -24,13 +24,13 @@ function AddCardPage() {
   }
 
   return (
-    <AppContainer>
+    <StyledContainer>
       <CardPreview
         cardNumber={cardNumber}
         expirationDate={expirationDate}
         cardIssuer={cardIssuer}
       />
-      <FormLayout onSubmit={handleOnSubmit}>
+      <StyledForm onSubmit={handleOnSubmit}>
         <CardPasswordSection value={cardPassword} setValue={setCardPassword} />
         <CvcSection value={cvc} setValue={setCvc} />
         <ExpirationDateSection
@@ -46,8 +46,8 @@ function AddCardPage() {
           cardIssuer={cardIssuer}
           cardPassword={cardPassword}
         />
-      </FormLayout>
-    </AppContainer>
+      </StyledForm>
+    </StyledContainer>
   );
 }
 

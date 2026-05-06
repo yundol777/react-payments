@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const StyledButton = styled.button`
-  width: 375px;
+  width: 376px;
   position: fixed;
   bottom: 0;
 

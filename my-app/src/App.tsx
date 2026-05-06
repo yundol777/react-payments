@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router';
+import { StyledMain } from './App.styles';
 
 function App() {
   return (
-    <main>
+    <StyledMain>
       <Outlet />
-    </main>
+    </StyledMain>
   );
 }
 
