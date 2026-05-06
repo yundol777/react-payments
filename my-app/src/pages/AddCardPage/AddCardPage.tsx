@@ -6,13 +6,22 @@ import ExpirationDateSection from '../../components/ExpirationDateSection/Expira
 import CvcSection from '../../components/CvcSection/CvcSection';
 import CardIssuerSection from '../../components/CardIssuerSection/CardIssuerSection';
 import CardPasswordSection from '../../components/CardPasswordSection/CardPasswordSection';
+import SubmitButtonSection from '../../components/SubmitButtonSection/SubmitButtonSection';
+import { useNavigate } from 'react-router';
 
 function AddCardPage() {
+  const navigate = useNavigate();
+
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
   const [cardIssuer, setCardIssuer] = useState('');
   const [cardPassword, setCardPassword] = useState('');
+
+  function handleOnSubmit(e: React.SubmitEvent) {
+    e.preventDefault();
+    navigate('/success');
+  }
 
   return (
     <AppContainer>
@@ -21,7 +30,7 @@ function AddCardPage() {
         expirationDate={expirationDate}
         cardIssuer={cardIssuer}
       />
-      <FormLayout>
+      <FormLayout onSubmit={handleOnSubmit}>
         <CardPasswordSection value={cardPassword} setValue={setCardPassword} />
         <CvcSection value={cvc} setValue={setCvc} />
         <ExpirationDateSection
@@ -30,6 +39,13 @@ function AddCardPage() {
         />
         <CardIssuerSection value={cardIssuer} setValue={setCardIssuer} />
         <CardNumberSection value={cardNumber} setValue={setCardNumber} />
+        <SubmitButtonSection
+          cardNumber={cardNumber}
+          expirationDate={expirationDate}
+          cvc={cvc}
+          cardIssuer={cardIssuer}
+          cardPassword={cardPassword}
+        />
       </FormLayout>
     </AppContainer>
   );
