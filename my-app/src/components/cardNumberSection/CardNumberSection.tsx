@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import {
-  getCardNumberErrorMessage,
-  isInputValidate,
-} from '../../utils/validation';
+import { isExactLength, isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
+import { getCardNumberError } from '../../utils/validation';
 
 interface Props {
   value: string[];
@@ -29,13 +27,13 @@ export default function CardNumberSection({ value, setValue }: Props) {
 
   function handleOnBlur(inputValue: string, index: number) {
     const newError = [...errors];
-    const inputErrorMessage = getCardNumberErrorMessage(inputValue);
+    const validation = getCardNumberError(value);
     const hasError = newError.some((error) => error);
 
-    newError[index] = inputErrorMessage !== '';
+    newError[index] = !isExactLength(inputValue, 4);
 
-    if (inputErrorMessage !== '') {
-      setErrorMessage(inputErrorMessage);
+    if (validation.error) {
+      setErrorMessage(validation.message);
     } else if (!hasError) {
       setErrorMessage('');
     }

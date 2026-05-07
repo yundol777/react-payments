@@ -1,34 +1,28 @@
-import {
-  getCardNumberErrorMessage,
-  getCvcErrorMessage,
-  getMonthErrorMessage,
-  getPasswordErrorMessage,
-  getYearErrorMessage,
-} from '../../utils/validation';
+import { hasCardFormError } from '../../utils/validation';
 import { StyledButton } from './SubmitButtonSection.styles';
 
 interface Props {
   cardNumber: string[];
-  expirationDate: { month: string; year: string };
-  cvc: string;
+  cardExpirationDate: { month: string; year: string };
+  cardCvc: string;
   cardIssuer: string;
   cardPassword: string;
 }
 
 function SubmitButtonSection({
   cardNumber,
-  expirationDate,
-  cvc,
+  cardExpirationDate,
+  cardCvc,
   cardIssuer,
   cardPassword,
 }: Props) {
-  const isFormValid =
-    cardNumber.every((number) => getCardNumberErrorMessage(number) === '') &&
-    getMonthErrorMessage(expirationDate.month) === '' &&
-    getYearErrorMessage(expirationDate.year) === '' &&
-    getCvcErrorMessage(cvc) === '' &&
-    getPasswordErrorMessage(cardPassword) === '' &&
-    cardIssuer !== '';
+  const isFormValid = !hasCardFormError({
+    cardNumber,
+    cardExpirationDate,
+    cardCvc,
+    cardIssuer,
+    cardPassword,
+  });
 
   return (
     <StyledButton type="submit" disabled={!isFormValid}>

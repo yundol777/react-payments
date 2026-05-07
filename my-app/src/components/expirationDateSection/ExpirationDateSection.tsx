@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import {
-  getMonthErrorMessage,
-  getYearErrorMessage,
-  isInputValidate,
-} from '../../utils/validation';
+import { isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
+import { getCardMonthError, getCardYearError } from '../../utils/validation';
 
 interface Props {
   value: {
@@ -30,23 +27,23 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
     setErrorMessage('');
   }
 
-  function handleOnBlur(inputValue: string, type: 'month' | 'year') {
-    const inputErrorMessage =
+  function handleOnBlur(type: 'month' | 'year') {
+    const validation =
       type === 'month'
-        ? getMonthErrorMessage(inputValue)
-        : getYearErrorMessage(inputValue);
+        ? getCardMonthError(value.month)
+        : getCardYearError(value.year);
 
-    const otherErrorMessage =
+    const otherValidation =
       type === 'month'
-        ? getYearErrorMessage(value.year)
-        : getMonthErrorMessage(value.month);
+        ? getCardYearError(value.year)
+        : getCardMonthError(value.month);
 
     setErrors({
       ...errors,
-      [type]: inputErrorMessage !== '',
+      [type]: validation.error,
     });
 
-    setErrorMessage(inputErrorMessage || otherErrorMessage);
+    setErrorMessage(validation.message || otherValidation.message);
   }
 
   return (
@@ -59,14 +56,14 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
       <NumberInput
         value={value.month}
         onChange={(v) => handleOnChange(v, 'month')}
-        onBlur={(v) => handleOnBlur(v, 'month')}
+        onBlur={() => handleOnBlur('month')}
         placeholder="MM"
         isError={errors.month}
       />
       <NumberInput
         value={value.year}
         onChange={(v) => handleOnChange(v, 'year')}
-        onBlur={(v) => handleOnBlur(v, 'year')}
+        onBlur={() => handleOnBlur('year')}
         placeholder="YY"
         isError={errors.year}
       />

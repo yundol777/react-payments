@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import CommonSection from '../../common/CommonSection/CommonSection';
-import {
-  getPasswordErrorMessage,
-  isInputValidate,
-} from '../../utils/validation';
+import { isInputValidate } from '../../utils/validation';
 import PasswordInput from './PasswordInput/PasswordInput';
+import { getCardPasswordError } from '../../utils/validation';
 
 interface Props {
   value: string;
@@ -25,11 +23,11 @@ function CardPasswordSection({ value, setValue }: Props) {
     setErrorMessage('');
   }
 
-  function handleOnBlur(inputValue: string) {
-    const inputErrorMessage = getPasswordErrorMessage(inputValue);
+  function handleOnBlur() {
+    const validation = getCardPasswordError(value);
 
-    setError(inputErrorMessage !== '');
-    setErrorMessage(inputErrorMessage);
+    setError(validation.error);
+    setErrorMessage(validation.message);
   }
 
   return (

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { getCvcErrorMessage, isInputValidate } from '../../utils/validation';
+import { isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
+import { getCardCvcError } from '../../utils/validation';
 
 interface Props {
   value: string;
@@ -22,11 +23,11 @@ export default function CvcSection({ value, setValue }: Props) {
     setErrorMessage('');
   }
 
-  function handleOnBlur(inputValue: string) {
-    const inputErrorMessage = getCvcErrorMessage(inputValue);
+  function handleOnBlur() {
+    const validation = getCardCvcError(value);
 
-    setError(inputErrorMessage !== '');
-    setErrorMessage(inputErrorMessage);
+    setError(validation.error);
+    setErrorMessage(validation.message);
   }
 
   return (

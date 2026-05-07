@@ -1,53 +1,51 @@
 import { useState } from 'react';
 import {
-  getCardNumberErrorMessage,
-  getCvcErrorMessage,
-  getMonthErrorMessage,
-  getPasswordErrorMessage,
-  getYearErrorMessage,
+  getCardCvcError,
+  getCardIssuerError,
+  getCardMonthError,
+  getCardNumberError,
+  getCardPasswordError,
+  getCardYearError,
 } from '../utils/validation';
 
 interface Props {
   cardNumber: string[];
-  expirationDate: { month: string; year: string };
-  cvc: string;
+  cardExpirationDate: { month: string; year: string };
+  cardCvc: string;
   cardIssuer: string;
   cardPassword: string;
 }
 
 function useFormStep({
   cardNumber,
-  expirationDate,
-  cvc,
+  cardExpirationDate,
+  cardCvc,
   cardIssuer,
   cardPassword,
 }: Props) {
   const [step, setStep] = useState(0);
 
-  if (
-    cardNumber.every((number) => getCardNumberErrorMessage(number) === '') &&
-    step === 0
-  ) {
+  if (getCardNumberError(cardNumber).error && step === 0) {
     setStep(1);
   }
 
-  if (cardIssuer !== '' && step === 1) {
+  if (getCardIssuerError(cardIssuer).error && step === 1) {
     setStep(2);
   }
 
   if (
-    getMonthErrorMessage(expirationDate.month) === '' &&
-    getYearErrorMessage(expirationDate.year) === '' &&
+    getCardMonthError(cardExpirationDate.month).error &&
+    getCardYearError(cardExpirationDate.year).error &&
     step === 2
   ) {
     setStep(3);
   }
 
-  if (getCvcErrorMessage(cvc) === '' && step === 3) {
+  if (getCardCvcError(cardCvc) && step === 3) {
     setStep(4);
   }
 
-  if (getPasswordErrorMessage(cardPassword) === '' && step === 4) {
+  if (getCardPasswordError(cardPassword) && step === 4) {
     setStep(5);
   }
 

@@ -14,8 +14,11 @@ function AddCardPage() {
   const navigate = useNavigate();
 
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
-  const [cvc, setCvc] = useState('');
+  const [cardExpirationDate, setCardExpirationDate] = useState({
+    month: '',
+    year: '',
+  });
+  const [cardCvc, setCardCvc] = useState('');
   const [cardIssuer, setCardIssuer] = useState('');
   const [cardPassword, setCardPassword] = useState('');
 
@@ -31,8 +34,8 @@ function AddCardPage() {
 
   const step = useFormStep({
     cardNumber,
-    expirationDate,
-    cvc,
+    cardExpirationDate,
+    cardCvc,
     cardIssuer,
     cardPassword,
   });
@@ -41,21 +44,30 @@ function AddCardPage() {
     <StyledContainer>
       <CardPreview
         cardNumber={cardNumber}
-        expirationDate={expirationDate}
+        expirationDate={cardExpirationDate}
         cardIssuer={cardIssuer}
       />
       <StyledForm onSubmit={handleOnSubmit}>
+        {step >= 5 && (
+          <SubmitButtonSection
+            cardNumber={cardNumber}
+            cardExpirationDate={cardExpirationDate}
+            cardCvc={cardCvc}
+            cardIssuer={cardIssuer}
+            cardPassword={cardPassword}
+          />
+        )}
         {step >= 4 && (
           <CardPasswordSection
             value={cardPassword}
             setValue={setCardPassword}
           />
         )}
-        {step >= 3 && <CvcSection value={cvc} setValue={setCvc} />}
+        {step >= 3 && <CvcSection value={cardCvc} setValue={setCardCvc} />}
         {step >= 2 && (
           <ExpirationDateSection
-            value={expirationDate}
-            setValue={setExpirationDate}
+            value={cardExpirationDate}
+            setValue={setCardExpirationDate}
           />
         )}
         {step >= 1 && (
@@ -63,15 +75,6 @@ function AddCardPage() {
         )}
         {step >= 0 && (
           <CardNumberSection value={cardNumber} setValue={setCardNumber} />
-        )}
-        {step >= 5 && (
-          <SubmitButtonSection
-            cardNumber={cardNumber}
-            expirationDate={expirationDate}
-            cvc={cvc}
-            cardIssuer={cardIssuer}
-            cardPassword={cardPassword}
-          />
         )}
       </StyledForm>
     </StyledContainer>
