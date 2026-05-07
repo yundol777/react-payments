@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getCvcErrorMessage, isInputValidate } from '../../utils/Validation';
+import { getCvcErrorMessage, isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
 

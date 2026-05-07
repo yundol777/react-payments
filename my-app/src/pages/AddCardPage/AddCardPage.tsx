@@ -8,6 +8,7 @@ import CardIssuerSection from '../../components/CardIssuerSection/CardIssuerSect
 import CardPasswordSection from '../../components/CardPasswordSection/CardPasswordSection';
 import SubmitButtonSection from '../../components/SubmitButtonSection/SubmitButtonSection';
 import { useNavigate } from 'react-router';
+import useFormStep from '../../hooks/useFormStep';
 
 function AddCardPage() {
   const navigate = useNavigate();
@@ -28,6 +29,14 @@ function AddCardPage() {
     });
   }
 
+  const step = useFormStep({
+    cardNumber,
+    expirationDate,
+    cvc,
+    cardIssuer,
+    cardPassword,
+  });
+
   return (
     <StyledContainer>
       <CardPreview
@@ -36,21 +45,34 @@ function AddCardPage() {
         cardIssuer={cardIssuer}
       />
       <StyledForm onSubmit={handleOnSubmit}>
-        <CardPasswordSection value={cardPassword} setValue={setCardPassword} />
-        <CvcSection value={cvc} setValue={setCvc} />
-        <ExpirationDateSection
-          value={expirationDate}
-          setValue={setExpirationDate}
-        />
-        <CardIssuerSection value={cardIssuer} setValue={setCardIssuer} />
-        <CardNumberSection value={cardNumber} setValue={setCardNumber} />
-        <SubmitButtonSection
-          cardNumber={cardNumber}
-          expirationDate={expirationDate}
-          cvc={cvc}
-          cardIssuer={cardIssuer}
-          cardPassword={cardPassword}
-        />
+        {step >= 4 && (
+          <CardPasswordSection
+            value={cardPassword}
+            setValue={setCardPassword}
+          />
+        )}
+        {step >= 3 && <CvcSection value={cvc} setValue={setCvc} />}
+        {step >= 2 && (
+          <ExpirationDateSection
+            value={expirationDate}
+            setValue={setExpirationDate}
+          />
+        )}
+        {step >= 1 && (
+          <CardIssuerSection value={cardIssuer} setValue={setCardIssuer} />
+        )}
+        {step >= 0 && (
+          <CardNumberSection value={cardNumber} setValue={setCardNumber} />
+        )}
+        {step >= 5 && (
+          <SubmitButtonSection
+            cardNumber={cardNumber}
+            expirationDate={expirationDate}
+            cvc={cvc}
+            cardIssuer={cardIssuer}
+            cardPassword={cardPassword}
+          />
+        )}
       </StyledForm>
     </StyledContainer>
   );

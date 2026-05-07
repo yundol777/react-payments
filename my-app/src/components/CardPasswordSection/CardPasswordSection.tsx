@@ -3,7 +3,7 @@ import CommonSection from '../../common/CommonSection/CommonSection';
 import {
   getPasswordErrorMessage,
   isInputValidate,
-} from '../../utils/Validation';
+} from '../../utils/validation';
 import PasswordInput from './PasswordInput/PasswordInput';
 
 interface Props {

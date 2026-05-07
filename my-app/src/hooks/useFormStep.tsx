@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import {
   getCardNumberErrorMessage,
   getCvcErrorMessage,
   getMonthErrorMessage,
   getPasswordErrorMessage,
   getYearErrorMessage,
-} from '../../utils/validation';
-import { StyledButton } from './SubmitButtonSection.styles';
+} from '../utils/validation';
 
 interface Props {
   cardNumber: string[];
@@ -15,26 +15,43 @@ interface Props {
   cardPassword: string;
 }
 
-function SubmitButtonSection({
+function useFormStep({
   cardNumber,
   expirationDate,
   cvc,
   cardIssuer,
   cardPassword,
 }: Props) {
-  const isFormValid =
+  const [step, setStep] = useState(0);
+
+  if (
     cardNumber.every((number) => getCardNumberErrorMessage(number) === '') &&
+    step === 0
+  ) {
+    setStep(1);
+  }
+
+  if (cardIssuer !== '' && step === 1) {
+    setStep(2);
+  }
+
+  if (
     getMonthErrorMessage(expirationDate.month) === '' &&
     getYearErrorMessage(expirationDate.year) === '' &&
-    getCvcErrorMessage(cvc) === '' &&
-    getPasswordErrorMessage(cardPassword) === '' &&
-    cardIssuer !== '';
+    step === 2
+  ) {
+    setStep(3);
+  }
 
-  return (
-    <StyledButton type="submit" disabled={!isFormValid}>
-      확인
-    </StyledButton>
-  );
+  if (getCvcErrorMessage(cvc) === '' && step === 3) {
+    setStep(4);
+  }
+
+  if (getPasswordErrorMessage(cardPassword) === '' && step === 4) {
+    setStep(5);
+  }
+
+  return step;
 }
 
-export default SubmitButtonSection;
+export default useFormStep;

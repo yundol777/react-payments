@@ -6,6 +6,15 @@ export function isExactLength(value: string, length: number): boolean {
   return value.length === length;
 }
 
+export function getAllCardNumberErrorMessage(cardNumber: string[]): string {
+  const allCardNumber = cardNumber.join('');
+  if (allCardNumber.length < 16) {
+    return '카드번호를 모두 입력해주세요.';
+  }
+
+  return '';
+}
+
 export function getCardNumberErrorMessage(cardNumber: string): string {
   if (!isExactLength(cardNumber, 4)) {
     return '카드번호는 4자리씩 입력해주세요.';
