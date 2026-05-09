@@ -1,45 +1,35 @@
 import { useState } from 'react';
-import { isExactLength, isInputValidate } from '../../utils/validation';
+import { isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
 import { getCardNumberError } from '../../utils/validation';
 
 interface Props {
-  value: string[];
-  setValue: (value: string[]) => void;
+  value: string;
+  setValue: (value: string) => void;
 }
 
 export default function CardNumberSection({ value, setValue }: Props) {
-  const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
+  const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  function handleOnChange(inputValue: string, index: number) {
+  function handleOnChange(inputValue: string) {
     if (!isInputValidate(inputValue, 4)) {
       setErrorMessage('카드번호는 숫자만 입력 가능합니다.');
       return;
     }
 
-    const newValue = [...value];
-    newValue[index] = inputValue;
-    setValue(newValue);
+    setValue(inputValue);
     setErrorMessage('');
   }
 
-  function handleOnBlur(inputValue: string, index: number) {
-    const newError = [...errors];
+  function handleOnBlur() {
     const validation = getCardNumberError(value);
-    const hasError = newError.some((error) => error);
 
-    newError[index] = !isExactLength(inputValue, 4);
-
-    if (validation.error) {
-      setErrorMessage(validation.message);
-    } else if (!hasError) {
-      setErrorMessage('');
-    }
-
-    setErrors(newError);
+    setError(validation.error);
+    setErrorMessage(validation.message);
   }
+
   return (
     <CommonSection
       title="결제할 카드 번호를 입력해주세요"
@@ -47,16 +37,13 @@ export default function CardNumberSection({ value, setValue }: Props) {
       label="카드 번호"
       errorMessage={errorMessage}
     >
-      {value.map((num, index) => (
-        <NumberInput
-          key={index}
-          value={num}
-          onChange={(v) => handleOnChange(v, index)}
-          onBlur={(v) => handleOnBlur(v, index)}
-          placeholder="1234"
-          isError={errors[index]}
-        />
-      ))}
+      <NumberInput
+        value={value}
+        onChange={(v) => handleOnChange(v)}
+        onBlur={handleOnBlur}
+        placeholder=""
+        isError={error}
+      />
     </CommonSection>
   );
 }

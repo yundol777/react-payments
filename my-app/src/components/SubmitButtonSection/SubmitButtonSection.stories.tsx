@@ -11,7 +11,7 @@ type Story = StoryObj<typeof SubmitButtonSection>;
 
 export const Enabled: Story = {
   args: {
-    cardNumber: ['1234', '5678', '1234', '5678'],
+    cardNumber: '12312312',
     cardExpirationDate: { month: '12', year: '30' },
     cardCvc: '123',
     cardIssuer: '신한카드',
@@ -21,11 +21,10 @@ export const Enabled: Story = {
 
 export const Disabled: Story = {
   args: {
-    cardNumber: ['1234', '5678', '1234', ''],
+    cardNumber: '1234123',
     cardExpirationDate: { month: '12', year: '30' },
     cardCvc: '123',
     cardIssuer: '신한카드',
     cardPassword: '12',
   },
 };
-

@@ -13,7 +13,7 @@ import useFormStep from '../../hooks/useFormStep';
 function AddCardPage() {
   const navigate = useNavigate();
 
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+  const [cardNumber, setCardNumber] = useState('');
   const [cardExpirationDate, setCardExpirationDate] = useState({
     month: '',
     year: '',

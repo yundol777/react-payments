@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardNumber,
 } from './CardPreview.styles';
-import EachCardNumber from './EachCardNumber/EachCardNumber';
 
 const CARD_COLOR: Record<string, string> = {
   BC카드: '#F04651',
@@ -20,7 +19,7 @@ const CARD_COLOR: Record<string, string> = {
 };
 
 interface Props {
-  cardNumber: string[];
+  cardNumber: string;
   expirationDate: { month: string; year: string };
   cardIssuer: string;
 }
@@ -34,12 +33,12 @@ export default function CardPreview({
     <CardContainer backgroundColor={CARD_COLOR[cardIssuer] ?? '#333333'}>
       <CardHeader>
         <CardChip />
-        <CardBrandImage cardNumber={cardNumber[0]} />
+        <CardBrandImage cardNumber={cardNumber} />
       </CardHeader>
       <CardNumber>
-        {cardNumber.map((number, index) => (
+        {/* {cardNumber.map((number, index) => (
           <EachCardNumber cardNumber={number} index={index} />
-        ))}
+        ))} */}
       </CardNumber>
       <CardExpirationDate>
         {expirationDate.month || 'MM'}/{expirationDate.year || 'YY'}

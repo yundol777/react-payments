@@ -12,14 +12,14 @@ type Story = StoryObj<typeof CardPreview>;
 // 기본 상태
 export const Master: Story = {
   args: {
-    cardNumber: ['5234', '5678', '1234', '5678'],
+    cardNumber: '5234567812345678',
     expirationDate: { month: '12', year: '30' },
   },
 };
 
 export const Visa: Story = {
   args: {
-    cardNumber: ['4234', '5678', '1234', '5678'],
+    cardNumber: '4234567812345678',
     expirationDate: { month: '12', year: '30' },
   },
 };
@@ -27,7 +27,7 @@ export const Visa: Story = {
 // 빈 카드 상태
 export const Empty: Story = {
   args: {
-    cardNumber: ['', '', '', ''],
+    cardNumber: '',
     expirationDate: { month: '', year: '' },
   },
 };

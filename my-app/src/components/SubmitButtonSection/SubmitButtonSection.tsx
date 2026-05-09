@@ -2,7 +2,7 @@ import { hasCardFormError } from '../../utils/validation';
 import { StyledButton } from './SubmitButtonSection.styles';
 
 interface Props {
-  cardNumber: string[];
+  cardNumber: string;
   cardExpirationDate: { month: string; year: string };
   cardCvc: string;
   cardIssuer: string;

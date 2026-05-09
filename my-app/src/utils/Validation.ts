@@ -1,5 +1,5 @@
 interface CardFormValues {
-  cardNumber: string[];
+  cardNumber: string;
   cardIssuer: string;
   cardExpirationDate: { month: string; year: string };
   cardCvc: string;
@@ -19,10 +19,8 @@ export function isExactLength(value: string, length: number): boolean {
   return value.length === length;
 }
 
-export function getCardNumberError(cardNumber: string[]): ErrorResponse {
-  const allCardNumber = cardNumber.join('');
-
-  if (!isExactLength(allCardNumber, 16)) {
+export function getCardNumberError(cardNumber: string): ErrorResponse {
+  if (!isExactLength(cardNumber, 16)) {
     return {
       error: true,
       message: '카드번호는 16자리를 입력해주세요.',

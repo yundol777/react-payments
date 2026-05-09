@@ -9,7 +9,7 @@ import {
 } from '../utils/validation';
 
 interface Props {
-  cardNumber: string[];
+  cardNumber: string;
   cardExpirationDate: { month: string; year: string };
   cardCvc: string;
   cardIssuer: string;
