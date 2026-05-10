@@ -26,7 +26,7 @@ function AddCardPage() {
     e.preventDefault();
     navigate('/success', {
       state: {
-        firstNumber: cardNumber[0],
+        firstNumber: cardNumber.slice(0, 4),
         issuer: cardIssuer,
       },
     });
