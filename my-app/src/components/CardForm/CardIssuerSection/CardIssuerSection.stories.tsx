@@ -14,7 +14,6 @@ export const Default: Story = {
   render: () => {
     const [value, setValue] = useState('');
 
-    return <CardIssuerSection value={value} setValue={setValue} />;
+    return <CardIssuerSection value={value} updateValue={setValue} />;
   },
 };
-

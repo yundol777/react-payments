@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import CommonSection from '../../common/CommonSection/CommonSection';
-import NumberInput from '../../common/NumberInput/NumberInput';
-import { getCardNumberError } from '../../utils/validation';
-import useFormattedInputCursor from '../../hooks/useFormattedInputCursor';
 import {
   formatCardNumberByPattern,
   getCardNumberPattern,
-} from '../../utils/cardBrand';
+} from '../../../utils/cardBrand';
+import useFormattedInputCursor from '../../../hooks/useFormattedInputCursor';
+import { getCardNumberError } from '../../../utils/validation';
+import CommonSection from '../../../common/CommonSection/CommonSection';
+import NumberInput from '../../../common/NumberInput/NumberInput';
 
 interface Props {
   value: string;

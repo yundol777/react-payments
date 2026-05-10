@@ -15,6 +15,6 @@ export const Second: Story = {
   render: () => {
     const [value, setValue] = useState({ month: '', year: '' });
 
-    return <ExpirationDateSection value={value} setValue={setValue} />;
+    return <ExpirationDateSection value={value} updateValue={setValue} />;
   },
 };

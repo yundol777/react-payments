@@ -1,4 +1,4 @@
-import CommonSection from '../../common/CommonSection/CommonSection';
+import CommonSection from '../../../common/CommonSection/CommonSection';
 import SelectInput from './SelectInput/SelectInput';
 
 interface Props {

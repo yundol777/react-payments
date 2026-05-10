@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import CommonSection from '../../common/CommonSection/CommonSection';
 import PasswordInput from './PasswordInput/PasswordInput';
-import { getCardPasswordError } from '../../utils/validation';
+import { getCardPasswordError } from '../../../utils/validation';
+import CommonSection from '../../../common/CommonSection/CommonSection';
 
 interface Props {
   value: string;

@@ -1,5 +1,5 @@
-import type { CardFormTypes } from '../../types/card';
-import { hasCardFormError } from '../../utils/validation';
+import type { CardFormTypes } from '../../../types/card';
+import { hasCardFormError } from '../../../utils/validation';
 import { StyledButton } from './SubmitButtonSection.styles';
 
 interface Props {

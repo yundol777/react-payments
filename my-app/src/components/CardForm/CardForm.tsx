@@ -1,11 +1,11 @@
 import useFormStep from '../../hooks/useFormStep';
 import type { CardFormTypes } from '../../types/card';
-import CardIssuerSection from '../CardIssuerSection/CardIssuerSection';
-import CardNumberSection from '../CardNumberSection/CardNumberSection';
-import CardPasswordSection from '../CardPasswordSection/CardPasswordSection';
-import CvcSection from '../CvcSection/CvcSection';
-import ExpirationDateSection from '../ExpirationDateSection/ExpirationDateSection';
-import SubmitButtonSection from '../SubmitButtonSection/SubmitButtonSection';
+import CardIssuerSection from './CardIssuerSection/CardIssuerSection';
+import CardNumberSection from './CardNumberSection/CardNumberSection';
+import CardPasswordSection from './CardPasswordSection/CardPasswordSection';
+import CvcSection from './CvcSection/CvcSection';
+import ExpirationDateSection from './ExpirationDateSection/ExpirationDateSection';
+import SubmitButtonSection from './SubmitButtonSection/SubmitButtonSection';
 import { StyledForm } from './CardForm.styles';
 
 interface Props {

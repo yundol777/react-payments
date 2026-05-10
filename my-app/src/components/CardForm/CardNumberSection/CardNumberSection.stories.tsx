@@ -15,6 +15,6 @@ export const Second: Story = {
   render: () => {
     const [value, setValue] = useState('');
 
-    return <CardNumberSection value={value} setValue={setValue} />;
+    return <CardNumberSection value={value} updateValue={setValue} />;
   },
 };

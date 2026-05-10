@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import ArrowDown from '../../../assets/ArrowDown.png';
+import ArrowDown from '../../../../assets/ArrowDown.png';
 
 export const StyledSelect = styled.select<{ isInitial: boolean }>`
   width: 100%;

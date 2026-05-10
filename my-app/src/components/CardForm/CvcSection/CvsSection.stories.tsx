@@ -15,6 +15,6 @@ export const Second: Story = {
   render: () => {
     const [value, setValue] = useState('');
 
-    return <CvcSection value={value} setValue={setValue} />;
+    return <CvcSection value={value} updateValue={setValue} />;
   },
 };
