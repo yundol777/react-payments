@@ -5,9 +5,16 @@ interface Props {
   onChange: (value: string) => void;
   onBlur: (value: string) => void;
   isError: boolean;
+  maxLength?: number;
 }
 
-function PasswordInput({ value, onChange, onBlur, isError }: Props) {
+function PasswordInput({
+  value,
+  onChange,
+  onBlur,
+  isError,
+  maxLength,
+}: Props) {
   return (
     <StyledInput
       type="password"
@@ -17,6 +24,7 @@ function PasswordInput({ value, onChange, onBlur, isError }: Props) {
       onBlur={(e) => onBlur(e.target.value)}
       placeholder="**"
       isError={isError}
+      maxLength={maxLength}
     />
   );
 }

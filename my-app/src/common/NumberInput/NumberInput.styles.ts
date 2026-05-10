@@ -9,6 +9,8 @@ export const StyledInput = styled.input<{ isError: boolean }>`
   font-weight: 400;
   padding: 8px;
   border-radius: 2px;
+  letter-spacing: 1px;
+  word-spacing: 10px;
 
   &::placeholder {
     color: #acacac;

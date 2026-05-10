@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import CommonSection from '../../common/CommonSection/CommonSection';
-import { isInputValidate } from '../../utils/validation';
 import PasswordInput from './PasswordInput/PasswordInput';
 import { getCardPasswordError } from '../../utils/validation';
 
@@ -14,7 +13,7 @@ function CardPasswordSection({ value, setValue }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleOnChange(inputValue: string) {
-    if (!isInputValidate(inputValue, 2)) {
+    if (!/^[0-9]*$/.test(inputValue)) {
       setErrorMessage('비밀번호는 숫자만 입력 가능합니다.');
       return;
     }
@@ -42,6 +41,7 @@ function CardPasswordSection({ value, setValue }: Props) {
         onChange={handleOnChange}
         onBlur={handleOnBlur}
         isError={error}
+        maxLength={2}
       />
     </CommonSection>
   );

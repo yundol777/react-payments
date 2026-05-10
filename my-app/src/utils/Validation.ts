@@ -1,3 +1,5 @@
+import { getCardNumberPattern } from './cardBrand';
+
 interface CardFormValues {
   cardNumber: string;
   cardIssuer: string;
@@ -20,10 +22,15 @@ export function isExactLength(value: string, length: number): boolean {
 }
 
 export function getCardNumberError(cardNumber: string): ErrorResponse {
-  if (!isExactLength(cardNumber, 16)) {
+  const expectedLength = getCardNumberPattern(cardNumber).reduce(
+    (sum, length) => sum + length,
+    0,
+  );
+
+  if (!isExactLength(cardNumber, expectedLength)) {
     return {
       error: true,
-      message: '카드번호는 16자리를 입력해주세요.',
+      message: `카드번호는 ${expectedLength}자리를 입력해주세요.`,
     };
   }
 

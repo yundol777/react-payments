@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
 import { getCardCvcError } from '../../utils/validation';
@@ -14,7 +13,7 @@ export default function CvcSection({ value, setValue }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleOnChange(inputValue: string) {
-    if (!isInputValidate(inputValue, 3)) {
+    if (!/^[0-9]*$/.test(inputValue)) {
       setErrorMessage('CVC는 숫자만 입력 가능합니다.');
       return;
     }
@@ -43,6 +42,7 @@ export default function CvcSection({ value, setValue }: Props) {
         onBlur={handleOnBlur}
         placeholder="123"
         isError={error}
+        maxLength={3}
       />
     </CommonSection>
   );

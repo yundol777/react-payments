@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
 import { getCardMonthError, getCardYearError } from '../../utils/validation';
@@ -17,7 +16,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   function handleOnChange(inputValue: string, type: 'month' | 'year') {
-    if (!isInputValidate(inputValue, 2)) {
+    if (!/^[0-9]*$/.test(inputValue)) {
       setErrorMessage('유효기간은 숫자만 입력 가능합니다.');
       return;
     }
@@ -59,6 +58,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
         onBlur={() => handleOnBlur('month')}
         placeholder="MM"
         isError={errors.month}
+        maxLength={2}
       />
       <NumberInput
         value={value.year}
@@ -66,6 +66,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
         onBlur={() => handleOnBlur('year')}
         placeholder="YY"
         isError={errors.year}
+        maxLength={2}
       />
     </CommonSection>
   );

@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import { isInputValidate } from '../../utils/validation';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
 import { getCardNumberError } from '../../utils/validation';
+import useFormattedInputCursor from '../../hooks/useFormattedInputCursor';
+import {
+  formatCardNumberByPattern,
+  getCardNumberPattern,
+} from '../../utils/cardBrand';
 
 interface Props {
   value: string;
@@ -12,14 +16,25 @@ interface Props {
 export default function CardNumberSection({ value, setValue }: Props) {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const pattern = getCardNumberPattern(value);
+  const maxLength = pattern.reduce((sum, length) => sum + length, 0);
+  const formattedMaxLength = maxLength + pattern.length - 1;
+  const formmatedValue = formatCardNumberByPattern(value, pattern)
+    .filter(Boolean)
+    .join(' ');
+  const { inputRef, rememberCursorPosition } =
+    useFormattedInputCursor(formmatedValue);
 
-  function handleOnChange(inputValue: string) {
-    if (!isInputValidate(inputValue, 4)) {
+  function handleOnChange(inputValue: string, cursorPosition: number | null) {
+    const onlyNumber = inputValue.replace(/\s/g, '');
+
+    if (!/^[0-9]*$/.test(onlyNumber)) {
       setErrorMessage('카드번호는 숫자만 입력 가능합니다.');
       return;
     }
 
-    setValue(inputValue);
+    rememberCursorPosition(inputValue, cursorPosition);
+    setValue(onlyNumber);
     setErrorMessage('');
   }
 
@@ -38,11 +53,13 @@ export default function CardNumberSection({ value, setValue }: Props) {
       errorMessage={errorMessage}
     >
       <NumberInput
-        value={value}
-        onChange={(v) => handleOnChange(v)}
+        inputRef={inputRef}
+        value={formmatedValue}
+        onChange={handleOnChange}
         onBlur={handleOnBlur}
-        placeholder=""
+        placeholder="0000 0000 0000 0000"
         isError={error}
+        maxLength={formattedMaxLength}
       />
     </CommonSection>
   );
