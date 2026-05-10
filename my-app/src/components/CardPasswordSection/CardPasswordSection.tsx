@@ -42,6 +42,7 @@ function CardPasswordSection({ value, setValue }: Props) {
         onBlur={handleOnBlur}
         isError={error}
         maxLength={2}
+        autoFocus
       />
     </CommonSection>
   );

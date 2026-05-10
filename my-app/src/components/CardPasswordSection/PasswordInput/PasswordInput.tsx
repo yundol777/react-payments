@@ -6,6 +6,7 @@ interface Props {
   onBlur: (value: string) => void;
   isError: boolean;
   maxLength?: number;
+  autoFocus?: boolean;
 }
 
 function PasswordInput({
@@ -14,6 +15,7 @@ function PasswordInput({
   onBlur,
   isError,
   maxLength,
+  autoFocus = false,
 }: Props) {
   return (
     <StyledInput
@@ -25,6 +27,7 @@ function PasswordInput({
       placeholder="**"
       isError={isError}
       maxLength={maxLength}
+      autoFocus={autoFocus}
     />
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CommonSection from '../../common/CommonSection/CommonSection';
 import NumberInput from '../../common/NumberInput/NumberInput';
 import { getCardMonthError, getCardYearError } from '../../utils/validation';
@@ -12,8 +12,20 @@ interface Props {
 }
 
 export default function ExpirationDateSection({ value, setValue }: Props) {
+  const monthInputRef = useRef<HTMLInputElement>(null);
+  const yearInputRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState({ month: false, year: false });
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const animationFrameId = requestAnimationFrame(() => {
+      monthInputRef.current?.focus();
+    });
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   function handleOnChange(inputValue: string, type: 'month' | 'year') {
     if (!/^[0-9]*$/.test(inputValue)) {
@@ -24,6 +36,12 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
     const newValue = { ...value, [type]: inputValue };
     setValue(newValue);
     setErrorMessage('');
+
+    if (type === 'month' && inputValue.length === 2) {
+      requestAnimationFrame(() => {
+        yearInputRef.current?.focus();
+      });
+    }
   }
 
   function handleOnBlur(type: 'month' | 'year') {
@@ -42,7 +60,11 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
       [type]: validation.error,
     });
 
-    setErrorMessage(validation.message || otherValidation.message);
+    setErrorMessage(
+      type === 'month'
+        ? validation.message
+        : validation.message || otherValidation.message,
+    );
   }
 
   return (
@@ -58,6 +80,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
         onBlur={() => handleOnBlur('month')}
         placeholder="MM"
         isError={errors.month}
+        inputRef={monthInputRef}
         maxLength={2}
       />
       <NumberInput
@@ -66,6 +89,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
         onBlur={() => handleOnBlur('year')}
         placeholder="YY"
         isError={errors.year}
+        inputRef={yearInputRef}
         maxLength={2}
       />
     </CommonSection>

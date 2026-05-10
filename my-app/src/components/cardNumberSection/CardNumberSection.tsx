@@ -60,6 +60,7 @@ export default function CardNumberSection({ value, setValue }: Props) {
         placeholder="0000 0000 0000 0000"
         isError={error}
         maxLength={formattedMaxLength}
+        autoFocus
       />
     </CommonSection>
   );

@@ -12,6 +12,7 @@ function SelectInput({ value, onChange }: Props) {
       onChange={(e) => onChange(e.target.value)}
       name="cardIssuer"
       isInitial={value === ''}
+      autoFocus
     >
       <StyledOption value="" hidden>
         카드사를 선택해주세요

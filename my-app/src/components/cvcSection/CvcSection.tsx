@@ -43,6 +43,7 @@ export default function CvcSection({ value, setValue }: Props) {
         placeholder="123"
         isError={error}
         maxLength={3}
+        autoFocus
       />
     </CommonSection>
   );
