@@ -1,12 +1,5 @@
+import type { CardFormTypes } from '../types/card';
 import { getCardNumberPattern } from './cardBrand';
-
-interface CardFormValues {
-  cardNumber: string;
-  cardIssuer: string;
-  cardExpirationDate: { month: string; year: string };
-  cardCvc: string;
-  cardPassword: string;
-}
 
 interface ErrorResponse {
   error: boolean;
@@ -119,20 +112,14 @@ export function getCardPasswordError(cardPassword: string): ErrorResponse {
   };
 }
 
-export function hasCardFormError({
-  cardNumber,
-  cardIssuer,
-  cardExpirationDate,
-  cardCvc,
-  cardPassword,
-}: CardFormValues): boolean {
+export function hasCardFormError(cardForm: CardFormTypes): boolean {
   const validations = [
-    getCardNumberError(cardNumber),
-    getCardIssuerError(cardIssuer),
-    getCardMonthError(cardExpirationDate.month),
-    getCardYearError(cardExpirationDate.year),
-    getCardCvcError(cardCvc),
-    getCardPasswordError(cardPassword),
+    getCardNumberError(cardForm.cardNumber),
+    getCardIssuerError(cardForm.cardIssuer),
+    getCardMonthError(cardForm.cardExpirationDate.month),
+    getCardYearError(cardForm.cardExpirationDate.year),
+    getCardCvcError(cardForm.cardCvc),
+    getCardPasswordError(cardForm.cardPassword),
   ];
 
   return validations.some((validation) => validation.error);
