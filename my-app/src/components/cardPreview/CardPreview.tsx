@@ -6,6 +6,11 @@ import {
   CardHeader,
   CardNumber,
 } from './CardPreview.styles';
+import EachCardNumber from './EachCardNumber/EachCardNumber';
+import {
+  formatCardNumberByPattern,
+  getCardNumberPattern,
+} from '../../utils/cardBrand';
 
 const CARD_COLOR: Record<string, string> = {
   BC카드: '#F04651',
@@ -29,6 +34,12 @@ export default function CardPreview({
   expirationDate,
   cardIssuer,
 }: Props) {
+  const cardNumberPattern = getCardNumberPattern(cardNumber);
+  const cardNumberGroups = formatCardNumberByPattern(
+    cardNumber,
+    cardNumberPattern,
+  );
+
   return (
     <CardContainer backgroundColor={CARD_COLOR[cardIssuer] ?? '#333333'}>
       <CardHeader>
@@ -36,9 +47,9 @@ export default function CardPreview({
         <CardBrandImage cardNumber={cardNumber} />
       </CardHeader>
       <CardNumber>
-        {/* {cardNumber.map((number, index) => (
-          <EachCardNumber cardNumber={number} index={index} />
-        ))} */}
+        {cardNumberGroups.map((number, index) => (
+          <EachCardNumber key={index} cardNumber={number} index={index} />
+        ))}
       </CardNumber>
       <CardExpirationDate>
         {expirationDate.month || 'MM'}/{expirationDate.year || 'YY'}
