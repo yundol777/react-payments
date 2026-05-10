@@ -8,10 +8,10 @@ interface Props {
     month: string;
     year: string;
   };
-  setValue: (value: { month: string; year: string }) => void;
+  updateValue: (value: { month: string; year: string }) => void;
 }
 
-export default function ExpirationDateSection({ value, setValue }: Props) {
+export default function ExpirationDateSection({ value, updateValue }: Props) {
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState({ month: false, year: false });
@@ -34,7 +34,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
     }
 
     const newValue = { ...value, [type]: inputValue };
-    setValue(newValue);
+    updateValue(newValue);
     setErrorMessage('');
 
     if (type === 'month' && inputValue.length === 2) {

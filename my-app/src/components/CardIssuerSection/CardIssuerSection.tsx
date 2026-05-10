@@ -3,12 +3,12 @@ import SelectInput from './SelectInput/SelectInput';
 
 interface Props {
   value: string;
-  setValue: (selectValue: string) => void;
+  updateValue: (selectValue: string) => void;
 }
 
-function CardIssuerSection({ value, setValue }: Props) {
+function CardIssuerSection({ value, updateValue }: Props) {
   function handleOnChange(selectValue: string): void {
-    setValue(selectValue);
+    updateValue(selectValue);
   }
 
   return (

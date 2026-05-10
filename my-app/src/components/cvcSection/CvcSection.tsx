@@ -5,10 +5,10 @@ import { getCardCvcError } from '../../utils/validation';
 
 interface Props {
   value: string;
-  setValue: (value: string) => void;
+  updateValue: (value: string) => void;
 }
 
-export default function CvcSection({ value, setValue }: Props) {
+export default function CvcSection({ value, updateValue }: Props) {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -18,7 +18,7 @@ export default function CvcSection({ value, setValue }: Props) {
       return;
     }
 
-    setValue(inputValue);
+    updateValue(inputValue);
     setErrorMessage('');
   }
 

@@ -26,31 +26,31 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= 4 && (
         <CardPasswordSection
           value={cardForm.cardPassword}
-          setValue={(value) => updateCardForm('cardPassword', value)}
+          updateValue={(value) => updateCardForm('cardPassword', value)}
         />
       )}
       {step >= 3 && (
         <CvcSection
           value={cardForm.cardCvc}
-          setValue={(value) => updateCardForm('cardCvc', value)}
+          updateValue={(value) => updateCardForm('cardCvc', value)}
         />
       )}
       {step >= 2 && (
         <ExpirationDateSection
           value={cardForm.cardExpirationDate}
-          setValue={(value) => updateCardForm('cardExpirationDate', value)}
+          updateValue={(value) => updateCardForm('cardExpirationDate', value)}
         />
       )}
       {step >= 1 && (
         <CardIssuerSection
           value={cardForm.cardIssuer}
-          setValue={(value) => updateCardForm('cardIssuer', value)}
+          updateValue={(value) => updateCardForm('cardIssuer', value)}
         />
       )}
       {step >= 0 && (
         <CardNumberSection
           value={cardForm.cardNumber}
-          setValue={(value) => updateCardForm('cardNumber', value)}
+          updateValue={(value) => updateCardForm('cardNumber', value)}
         />
       )}
     </StyledForm>

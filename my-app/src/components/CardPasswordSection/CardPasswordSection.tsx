@@ -5,10 +5,10 @@ import { getCardPasswordError } from '../../utils/validation';
 
 interface Props {
   value: string;
-  setValue: (value: string) => void;
+  updateValue: (value: string) => void;
 }
 
-function CardPasswordSection({ value, setValue }: Props) {
+function CardPasswordSection({ value, updateValue }: Props) {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -18,7 +18,7 @@ function CardPasswordSection({ value, setValue }: Props) {
       return;
     }
 
-    setValue(inputValue);
+    updateValue(inputValue);
     setErrorMessage('');
   }
 

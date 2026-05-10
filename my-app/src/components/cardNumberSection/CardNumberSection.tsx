@@ -10,10 +10,10 @@ import {
 
 interface Props {
   value: string;
-  setValue: (value: string) => void;
+  updateValue: (value: string) => void;
 }
 
-export default function CardNumberSection({ value, setValue }: Props) {
+export default function CardNumberSection({ value, updateValue }: Props) {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState('');
   const pattern = getCardNumberPattern(value);
@@ -34,7 +34,7 @@ export default function CardNumberSection({ value, setValue }: Props) {
     }
 
     rememberCursorPosition(inputValue, cursorPosition);
-    setValue(onlyNumber);
+    updateValue(onlyNumber);
     setErrorMessage('');
   }
 
