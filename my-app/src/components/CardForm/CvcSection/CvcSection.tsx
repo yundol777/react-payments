@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
-import { getCardCvcError } from '../../../utils/validation';
+import useCvc from '../../../hooks/useCvc';
 
 interface Props {
   value: string;
@@ -9,25 +8,10 @@ interface Props {
 }
 
 export default function CvcSection({ value, updateValue }: Props) {
-  const [error, setError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  function handleOnChange(inputValue: string) {
-    if (!/^[0-9]*$/.test(inputValue)) {
-      setErrorMessage('CVC는 숫자만 입력 가능합니다.');
-      return;
-    }
-
-    updateValue(inputValue);
-    setErrorMessage('');
-  }
-
-  function handleOnBlur() {
-    const validation = getCardCvcError(value);
-
-    setError(validation.error);
-    setErrorMessage(validation.message);
-  }
+  const { error, errorMessage, handleOnChange, handleOnBlur } = useCvc({
+    value,
+    updateValue,
+  });
 
   return (
     <CommonSection
