@@ -1,5 +1,11 @@
 import type { CardFormTypes } from '../types/card';
-import { CARD_BRAND_NAMES, getCardNumberInfo } from './cardBrand';
+import { CARD_BRAND_NAMES } from '../constants/cardBrand';
+import {
+  CARD_PASSWORD_MAX_LENGTH,
+  CVC_MAX_LENGTH,
+  EXPIRATION_DATE_FIELD_MAX_LENGTH,
+} from '../constants/form';
+import { getCardNumberInfo } from './cardBrand';
 
 interface ErrorResponse {
   error: boolean;
@@ -54,10 +60,10 @@ export function getCardIssuerError(cardIssuer: string): ErrorResponse {
 export function getCardMonthError(cardMonth: string): ErrorResponse {
   const monthNum = Number(cardMonth);
 
-  if (!isExactLength(cardMonth, 2)) {
+  if (!isExactLength(cardMonth, EXPIRATION_DATE_FIELD_MAX_LENGTH)) {
     return {
       error: true,
-      message: '월은 2자리로 입력해주세요.',
+      message: `월은 ${EXPIRATION_DATE_FIELD_MAX_LENGTH}자리로 입력해주세요.`,
     };
   }
 
@@ -75,10 +81,10 @@ export function getCardMonthError(cardMonth: string): ErrorResponse {
 }
 
 export function getCardYearError(cardYear: string): ErrorResponse {
-  if (!isExactLength(cardYear, 2)) {
+  if (!isExactLength(cardYear, EXPIRATION_DATE_FIELD_MAX_LENGTH)) {
     return {
       error: true,
-      message: '연도는 2자리로 입력해주세요.',
+      message: `연도는 ${EXPIRATION_DATE_FIELD_MAX_LENGTH}자리로 입력해주세요.`,
     };
   }
 
@@ -89,10 +95,10 @@ export function getCardYearError(cardYear: string): ErrorResponse {
 }
 
 export function getCardCvcError(cardCvc: string): ErrorResponse {
-  if (!isExactLength(cardCvc, 3)) {
+  if (!isExactLength(cardCvc, CVC_MAX_LENGTH)) {
     return {
       error: true,
-      message: 'CVC는 3자리로 입력해주세요.',
+      message: `CVC는 ${CVC_MAX_LENGTH}자리로 입력해주세요.`,
     };
   }
 
@@ -103,10 +109,10 @@ export function getCardCvcError(cardCvc: string): ErrorResponse {
 }
 
 export function getCardPasswordError(cardPassword: string): ErrorResponse {
-  if (!isExactLength(cardPassword, 2)) {
+  if (!isExactLength(cardPassword, CARD_PASSWORD_MAX_LENGTH)) {
     return {
       error: true,
-      message: '비밀번호는 2자리로 입력해주세요.',
+      message: `비밀번호는 ${CARD_PASSWORD_MAX_LENGTH}자리로 입력해주세요.`,
     };
   }
 

@@ -1,5 +1,6 @@
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
+import { CVC_MAX_LENGTH } from '../../../constants/form';
 import useInitialFocus from '../../../hooks/useInitialFocus';
 import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
 import { getCardCvcError } from '../../../utils/validation';
@@ -35,7 +36,7 @@ export default function CvcSection({ value, updateValue }: Props) {
         onBlur={handleOnBlur}
         placeholder="123"
         isError={error}
-        maxLength={3}
+        maxLength={CVC_MAX_LENGTH}
       />
     </CommonSection>
   );

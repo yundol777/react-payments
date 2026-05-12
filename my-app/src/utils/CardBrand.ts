@@ -1,30 +1,10 @@
-export type CardBrand =
-  | 'Visa'
-  | 'MasterCard'
-  | 'Diners'
-  | 'AMEX'
-  | 'UnionPay'
-  | '';
+import {
+  CARD_NUMBER_PATTERNS,
+  DEFAULT_CARD_NUMBER_PATTERN,
+  type CardBrand,
+} from '../constants/cardBrand';
 
-export const DEFAULT_CARD_NUMBER_PATTERN = [4, 4, 4, 4];
-
-export const CARD_NUMBER_PATTERNS: Record<Exclude<CardBrand, ''>, number[]> = {
-  Visa: [4, 4, 4, 4],
-  MasterCard: [4, 4, 4, 4],
-  Diners: [4, 6, 4],
-  AMEX: [4, 6, 5],
-  UnionPay: [4, 4, 4, 4],
-};
-
-export const CARD_BRAND_NAMES: Record<Exclude<CardBrand, ''>, string> = {
-  Visa: '비자 카드',
-  MasterCard: '마스터 카드',
-  Diners: '다이너스 카드',
-  AMEX: '아멕스 카드',
-  UnionPay: '유니온페이 카드',
-};
-
-export function getCardBrand(cardNumber: string): CardBrand {
+export function getCardBrand(cardNumber: string): CardBrand | '' {
   const firstTwoDigits = Number(cardNumber.slice(0, 2));
   const firstThreeDigits = Number(cardNumber.slice(0, 3));
   const firstFourDigits = Number(cardNumber.slice(0, 4));

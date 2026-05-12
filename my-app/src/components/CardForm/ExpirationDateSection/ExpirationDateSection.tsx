@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
+import { EXPIRATION_DATE_FIELD_MAX_LENGTH } from '../../../constants/form';
 import useExpirationDateValidation from '../../../hooks/useExpirationDateValidation';
 import useInitialFocus from '../../../hooks/useInitialFocus';
 
@@ -22,7 +23,10 @@ export default function ExpirationDateSection({ value, updateValue }: Props) {
   function handleMonthChange(inputValue: string) {
     handleOnChange(inputValue, 'month');
 
-    if (/^[0-9]*$/.test(inputValue) && inputValue.length === 2) {
+    if (
+      /^[0-9]*$/.test(inputValue) &&
+      inputValue.length === EXPIRATION_DATE_FIELD_MAX_LENGTH
+    ) {
       requestAnimationFrame(() => {
         yearInputRef.current?.focus();
       });
@@ -44,7 +48,7 @@ export default function ExpirationDateSection({ value, updateValue }: Props) {
         placeholder="MM"
         isError={errors.month}
         inputRef={monthInputRef}
-        maxLength={2}
+        maxLength={EXPIRATION_DATE_FIELD_MAX_LENGTH}
       />
       <NumberInput
         type="text"
@@ -54,7 +58,7 @@ export default function ExpirationDateSection({ value, updateValue }: Props) {
         placeholder="YY"
         isError={errors.year}
         inputRef={yearInputRef}
-        maxLength={2}
+        maxLength={EXPIRATION_DATE_FIELD_MAX_LENGTH}
       />
     </CommonSection>
   );

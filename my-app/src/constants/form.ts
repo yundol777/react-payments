@@ -1,0 +1,3 @@
+export const CVC_MAX_LENGTH = 3;
+export const CARD_PASSWORD_MAX_LENGTH = 2;
+export const EXPIRATION_DATE_FIELD_MAX_LENGTH = 2;

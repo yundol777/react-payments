@@ -1,4 +1,5 @@
 import useFormStep from '../../hooks/useFormStep';
+import { FORM_STEP } from '../../constants/formStep';
 import type { CardFormTypes } from '../../types/card';
 import CardIssuerSection from './CardIssuerSection/CardIssuerSection';
 import CardNumberSection from './CardNumberSection/CardNumberSection';
@@ -22,32 +23,32 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
-      {step >= 5 && <SubmitButtonSection cardForm={cardForm} />}
-      {step >= 4 && (
+      {step >= FORM_STEP.SUBMIT && <SubmitButtonSection cardForm={cardForm} />}
+      {step >= FORM_STEP.PASSWORD && (
         <CardPasswordSection
           value={cardForm.cardPassword}
           updateValue={(value) => updateCardForm('cardPassword', value)}
         />
       )}
-      {step >= 3 && (
+      {step >= FORM_STEP.CVC && (
         <CvcSection
           value={cardForm.cardCvc}
           updateValue={(value) => updateCardForm('cardCvc', value)}
         />
       )}
-      {step >= 2 && (
+      {step >= FORM_STEP.EXPIRATION_DATE && (
         <ExpirationDateSection
           value={cardForm.cardExpirationDate}
           updateValue={(value) => updateCardForm('cardExpirationDate', value)}
         />
       )}
-      {step >= 1 && (
+      {step >= FORM_STEP.CARD_ISSUER && (
         <CardIssuerSection
           value={cardForm.cardIssuer}
           updateValue={(value) => updateCardForm('cardIssuer', value)}
         />
       )}
-      {step >= 0 && (
+      {step >= FORM_STEP.CARD_NUMBER && (
         <CardNumberSection
           value={cardForm.cardNumber}
           updateValue={(value) => updateCardForm('cardNumber', value)}

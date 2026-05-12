@@ -1,5 +1,6 @@
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
+import { CARD_PASSWORD_MAX_LENGTH } from '../../../constants/form';
 import useInitialFocus from '../../../hooks/useInitialFocus';
 import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
 import { getCardPasswordError } from '../../../utils/validation';
@@ -35,7 +36,7 @@ function CardPasswordSection({ value, updateValue }: Props) {
         onBlur={handleOnBlur}
         placeholder="**"
         isError={error}
-        maxLength={2}
+        maxLength={CARD_PASSWORD_MAX_LENGTH}
       />
     </CommonSection>
   );
