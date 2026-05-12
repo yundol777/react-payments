@@ -1,6 +1,7 @@
 import { StyledInput } from './NumberInput.styles';
 
 interface Props {
+  type: 'text' | 'password';
   value: string;
   onChange: (value: string, cursorPosition: number | null) => void;
   onBlur: (value: string) => void;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function NumberInput({
+  type,
   value,
   onChange,
   onBlur,
@@ -22,7 +24,7 @@ export default function NumberInput({
   return (
     <StyledInput
       ref={inputRef}
-      type="text"
+      type={type}
       inputMode="numeric"
       value={value}
       onChange={(e) => onChange(e.target.value, e.target.selectionStart)}

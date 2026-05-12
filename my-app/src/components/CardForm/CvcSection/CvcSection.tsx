@@ -28,6 +28,7 @@ export default function CvcSection({ value, updateValue }: Props) {
       errorMessage={errorMessage}
     >
       <NumberInput
+        type="text"
         inputRef={inputRef}
         value={value}
         onChange={handleOnChange}

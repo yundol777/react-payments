@@ -1,5 +1,5 @@
-import PasswordInput from './PasswordInput/PasswordInput';
 import CommonSection from '../../../common/CommonSection/CommonSection';
+import NumberInput from '../../../common/NumberInput/NumberInput';
 import useInitialFocus from '../../../hooks/useInitialFocus';
 import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
 import { getCardPasswordError } from '../../../utils/validation';
@@ -27,11 +27,13 @@ function CardPasswordSection({ value, updateValue }: Props) {
       label="비밀번호 앞 2자리"
       errorMessage={errorMessage}
     >
-      <PasswordInput
+      <NumberInput
+        type="password"
         inputRef={inputRef}
         value={value}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
+        placeholder="**"
         isError={error}
         maxLength={2}
       />

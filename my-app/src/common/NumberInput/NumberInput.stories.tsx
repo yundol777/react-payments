@@ -12,7 +12,10 @@ type Story = StoryObj<typeof NumberInput>;
 
 export const First: Story = {
   args: {
+    type: 'text',
     placeholder: '숫자를 입력하세요',
+    isError: false,
+    onBlur: () => {},
   },
   // render 함수를 통해 스토리북 안에서 상태(state)를 직접 관리합니다.
   render: (args) => {

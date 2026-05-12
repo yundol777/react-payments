@@ -32,6 +32,7 @@ export default function CardNumberSection({ value, updateValue }: Props) {
       errorMessage={errorMessage}
     >
       <NumberInput
+        type="text"
         inputRef={inputRef}
         value={formattedValue}
         onChange={(inputValue, cursorPosition) => {

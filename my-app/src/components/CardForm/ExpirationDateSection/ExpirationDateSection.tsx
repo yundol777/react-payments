@@ -37,6 +37,7 @@ export default function ExpirationDateSection({ value, updateValue }: Props) {
       errorMessage={errorMessage}
     >
       <NumberInput
+        type="text"
         value={value.month}
         onChange={handleMonthChange}
         onBlur={() => handleOnBlur('month')}
@@ -46,6 +47,7 @@ export default function ExpirationDateSection({ value, updateValue }: Props) {
         maxLength={2}
       />
       <NumberInput
+        type="text"
         value={value.year}
         onChange={(v) => handleOnChange(v, 'year')}
         onBlur={() => handleOnBlur('year')}
