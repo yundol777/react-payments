@@ -1,6 +1,8 @@
+import { useRef } from 'react';
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
-import useExpirationDate from '../../../hooks/useExpirationDate';
+import useExpirationDateValidation from '../../../hooks/useExpirationDateValidation';
+import useInitialFocus from '../../../hooks/useInitialFocus';
 
 interface Props {
   value: {
@@ -11,14 +13,21 @@ interface Props {
 }
 
 export default function ExpirationDateSection({ value, updateValue }: Props) {
-  const {
-    errors,
-    errorMessage,
-    handleOnChange,
-    handleOnBlur,
-    monthInputRef,
-    yearInputRef,
-  } = useExpirationDate({ value, updateValue });
+  const monthInputRef = useInitialFocus<HTMLInputElement>();
+  const yearInputRef = useRef<HTMLInputElement>(null);
+
+  const { errors, errorMessage, handleOnChange, handleOnBlur } =
+    useExpirationDateValidation({ value, updateValue });
+
+  function handleMonthChange(inputValue: string) {
+    handleOnChange(inputValue, 'month');
+
+    if (/^[0-9]*$/.test(inputValue) && inputValue.length === 2) {
+      requestAnimationFrame(() => {
+        yearInputRef.current?.focus();
+      });
+    }
+  }
 
   return (
     <CommonSection
@@ -29,7 +38,7 @@ export default function ExpirationDateSection({ value, updateValue }: Props) {
     >
       <NumberInput
         value={value.month}
-        onChange={(v) => handleOnChange(v, 'month')}
+        onChange={handleMonthChange}
         onBlur={() => handleOnBlur('month')}
         placeholder="MM"
         isError={errors.month}

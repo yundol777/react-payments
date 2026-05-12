@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
+import useInitialFocus from './useInitialFocus';
 
 function getFormattedCursorPosition(
   formattedValue: string,
@@ -24,7 +25,7 @@ function getFormattedCursorPosition(
 }
 
 export default function useFormattedInputCursor(formattedValue: string) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useInitialFocus<HTMLInputElement>();
   const nextCursorNumberIndex = useRef<number | null>(null);
 
   useLayoutEffect(() => {
@@ -39,7 +40,7 @@ export default function useFormattedInputCursor(formattedValue: string) {
 
     inputRef.current?.setSelectionRange(cursorPosition, cursorPosition);
     nextCursorNumberIndex.current = null;
-  }, [formattedValue]);
+  }, [formattedValue, inputRef]);
 
   function rememberCursorPosition(
     inputValue: string,

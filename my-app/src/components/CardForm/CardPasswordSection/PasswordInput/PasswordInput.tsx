@@ -5,8 +5,8 @@ interface Props {
   onChange: (value: string) => void;
   onBlur: (value: string) => void;
   isError: boolean;
+  inputRef?: React.Ref<HTMLInputElement>;
   maxLength?: number;
-  autoFocus?: boolean;
 }
 
 function PasswordInput({
@@ -14,11 +14,12 @@ function PasswordInput({
   onChange,
   onBlur,
   isError,
+  inputRef,
   maxLength,
-  autoFocus = false,
 }: Props) {
   return (
     <StyledInput
+      ref={inputRef}
       type="password"
       inputMode="numeric"
       value={value}
@@ -27,7 +28,6 @@ function PasswordInput({
       placeholder="**"
       isError={isError}
       maxLength={maxLength}
-      autoFocus={autoFocus}
     />
   );
 }

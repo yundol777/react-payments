@@ -3,16 +3,17 @@ import { StyledOption, StyledSelect } from './SelectInput.styles';
 interface Props {
   value: string;
   onChange: (selectValue: string) => void;
+  inputRef?: React.Ref<HTMLSelectElement>;
 }
 
-function SelectInput({ value, onChange }: Props) {
+function SelectInput({ value, onChange, inputRef }: Props) {
   return (
     <StyledSelect
+      ref={inputRef}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       name="cardIssuer"
       isInitial={value === ''}
-      autoFocus
     >
       <StyledOption value="" hidden>
         카드사를 선택해주세요

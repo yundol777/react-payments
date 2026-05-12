@@ -8,7 +8,6 @@ interface Props {
   isError: boolean;
   inputRef?: React.Ref<HTMLInputElement>;
   maxLength?: number;
-  autoFocus?: boolean;
 }
 
 export default function NumberInput({
@@ -19,7 +18,6 @@ export default function NumberInput({
   isError,
   inputRef,
   maxLength,
-  autoFocus = false,
 }: Props) {
   return (
     <StyledInput
@@ -32,7 +30,6 @@ export default function NumberInput({
       placeholder={placeholder}
       isError={isError}
       maxLength={maxLength}
-      autoFocus={autoFocus}
     />
   );
 }

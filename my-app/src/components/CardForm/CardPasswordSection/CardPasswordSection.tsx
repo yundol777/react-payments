@@ -1,5 +1,6 @@
 import PasswordInput from './PasswordInput/PasswordInput';
 import CommonSection from '../../../common/CommonSection/CommonSection';
+import useInitialFocus from '../../../hooks/useInitialFocus';
 import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
 import { getCardPasswordError } from '../../../utils/validation';
 
@@ -9,6 +10,8 @@ interface Props {
 }
 
 function CardPasswordSection({ value, updateValue }: Props) {
+  const inputRef = useInitialFocus<HTMLInputElement>();
+
   const { error, errorMessage, handleOnChange, handleOnBlur } =
     useValidatedNumberInput({
       value,
@@ -25,12 +28,12 @@ function CardPasswordSection({ value, updateValue }: Props) {
       errorMessage={errorMessage}
     >
       <PasswordInput
+        inputRef={inputRef}
         value={value}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
         isError={error}
         maxLength={2}
-        autoFocus
       />
     </CommonSection>
   );

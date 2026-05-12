@@ -1,4 +1,5 @@
 import CommonSection from '../../../common/CommonSection/CommonSection';
+import useInitialFocus from '../../../hooks/useInitialFocus';
 import SelectInput from './SelectInput/SelectInput';
 
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
 }
 
 function CardIssuerSection({ value, updateValue }: Props) {
+  const selectRef = useInitialFocus<HTMLSelectElement>();
+
   function handleOnChange(selectValue: string): void {
     updateValue(selectValue);
   }
@@ -16,7 +19,11 @@ function CardIssuerSection({ value, updateValue }: Props) {
       title="카드사를 선택해 주세요"
       description="현재 국내 카드사만 가능합니다"
     >
-      <SelectInput value={value} onChange={handleOnChange} />
+      <SelectInput
+        inputRef={selectRef}
+        value={value}
+        onChange={handleOnChange}
+      />
     </CommonSection>
   );
 }

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { getCardMonthError, getCardYearError } from '../utils/validation';
 
 interface Props {
@@ -9,22 +9,9 @@ interface Props {
   updateValue: (value: { month: string; year: string }) => void;
 }
 
-function useExpirationDate({ value, updateValue }: Props) {
-  const monthInputRef = useRef<HTMLInputElement>(null);
-  const yearInputRef = useRef<HTMLInputElement>(null);
-
+function useExpirationDateValidation({ value, updateValue }: Props) {
   const [errors, setErrors] = useState({ month: false, year: false });
   const [errorMessage, setErrorMessage] = useState('');
-
-  useLayoutEffect(() => {
-    const animationFrameId = requestAnimationFrame(() => {
-      monthInputRef.current?.focus();
-    });
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
 
   function handleOnChange(inputValue: string, type: 'month' | 'year') {
     if (!/^[0-9]*$/.test(inputValue)) {
@@ -32,15 +19,8 @@ function useExpirationDate({ value, updateValue }: Props) {
       return;
     }
 
-    const newValue = { ...value, [type]: inputValue };
-    updateValue(newValue);
+    updateValue({ ...value, [type]: inputValue });
     setErrorMessage('');
-
-    if (type === 'month' && inputValue.length === 2) {
-      requestAnimationFrame(() => {
-        yearInputRef.current?.focus();
-      });
-    }
   }
 
   function handleOnBlur(type: 'month' | 'year') {
@@ -71,9 +51,7 @@ function useExpirationDate({ value, updateValue }: Props) {
     errorMessage,
     handleOnChange,
     handleOnBlur,
-    monthInputRef,
-    yearInputRef,
   };
 }
 
-export default useExpirationDate;
+export default useExpirationDateValidation;

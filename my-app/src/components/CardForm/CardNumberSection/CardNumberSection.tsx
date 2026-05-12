@@ -42,7 +42,6 @@ export default function CardNumberSection({ value, updateValue }: Props) {
         placeholder="0000 0000 0000 0000"
         isError={error}
         maxLength={formattedMaxLength}
-        autoFocus
       />
     </CommonSection>
   );
