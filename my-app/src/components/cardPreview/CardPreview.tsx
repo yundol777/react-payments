@@ -10,13 +10,14 @@ import EachCardNumber from './EachCardNumber/EachCardNumber';
 import {
   CARD_ISSUER_COLORS,
   DEFAULT_CARD_COLOR,
+  type SelectedCardIssuer,
 } from '../../constants/cardIssuer';
 import { getCardNumberInfo } from '../../utils/cardBrand';
 
 interface Props {
   cardNumber: string;
   expirationDate: { month: string; year: string };
-  cardIssuer: string;
+  cardIssuer: SelectedCardIssuer;
 }
 
 export default function CardPreview({
@@ -25,9 +26,9 @@ export default function CardPreview({
   cardIssuer,
 }: Props) {
   const { groups } = getCardNumberInfo(cardNumber);
-  const backgroundColor =
-    CARD_ISSUER_COLORS[cardIssuer as keyof typeof CARD_ISSUER_COLORS] ??
-    DEFAULT_CARD_COLOR;
+  const backgroundColor = cardIssuer
+    ? CARD_ISSUER_COLORS[cardIssuer]
+    : DEFAULT_CARD_COLOR;
 
   return (
     <CardContainer backgroundColor={backgroundColor}>

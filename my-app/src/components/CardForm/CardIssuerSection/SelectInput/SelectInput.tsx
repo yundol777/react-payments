@@ -1,9 +1,13 @@
-import { CARD_ISSUERS } from '../../../../constants/cardIssuer';
+import {
+  CARD_ISSUERS,
+  isCardIssuer,
+  type SelectedCardIssuer,
+} from '../../../../constants/cardIssuer';
 import { StyledOption, StyledSelect } from './SelectInput.styles';
 
 interface Props {
-  value: string;
-  onChange: (selectValue: string) => void;
+  value: SelectedCardIssuer;
+  onChange: (selectValue: SelectedCardIssuer) => void;
   inputRef?: React.Ref<HTMLSelectElement>;
 }
 
@@ -12,7 +16,10 @@ function SelectInput({ value, onChange, inputRef }: Props) {
     <StyledSelect
       ref={inputRef}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => {
+        const selectValue = e.target.value;
+        onChange(isCardIssuer(selectValue) ? selectValue : '');
+      }}
       name="cardIssuer"
       isInitial={value === ''}
     >

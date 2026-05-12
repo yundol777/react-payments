@@ -10,6 +10,7 @@ export const CARD_ISSUERS = [
 ] as const;
 
 export type CardIssuer = (typeof CARD_ISSUERS)[number];
+export type SelectedCardIssuer = CardIssuer | '';
 
 export const DEFAULT_CARD_COLOR = '#333333';
 
@@ -23,3 +24,7 @@ export const CARD_ISSUER_COLORS: Record<CardIssuer, string> = {
   하나카드: '#009490',
   국민카드: '#6A6056',
 };
+
+export function isCardIssuer(value: string): value is CardIssuer {
+  return CARD_ISSUERS.includes(value as CardIssuer);
+}

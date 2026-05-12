@@ -1,16 +1,17 @@
 import CommonSection from '../../../common/CommonSection/CommonSection';
+import type { SelectedCardIssuer } from '../../../constants/cardIssuer';
 import useInitialFocus from '../../../hooks/useInitialFocus';
 import SelectInput from './SelectInput/SelectInput';
 
 interface Props {
-  value: string;
-  updateValue: (selectValue: string) => void;
+  value: SelectedCardIssuer;
+  updateValue: (selectValue: SelectedCardIssuer) => void;
 }
 
 function CardIssuerSection({ value, updateValue }: Props) {
   const selectRef = useInitialFocus<HTMLSelectElement>();
 
-  function handleOnChange(selectValue: string): void {
+  function handleOnChange(selectValue: SelectedCardIssuer): void {
     updateValue(selectValue);
   }
 

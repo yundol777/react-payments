@@ -18,27 +18,37 @@ function useValidatedNumberInput({
   validate,
   invalidMessage,
 }: Props) {
-  const [error, setError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [validation, setValidation] = useState<ValidationResult>({
+    error: false,
+    message: '',
+  });
 
   function handleOnChange(inputValue: string) {
     if (!/^[0-9]*$/.test(inputValue)) {
-      setErrorMessage(invalidMessage);
+      setValidation({
+        error: true,
+        message: invalidMessage,
+      });
       return;
     }
 
     updateValue(inputValue);
-    setErrorMessage('');
+    setValidation({
+      error: false,
+      message: '',
+    });
   }
 
   function handleOnBlur() {
-    const validation = validate(value);
-
-    setError(validation.error);
-    setErrorMessage(validation.message);
+    setValidation(validate(value));
   }
 
-  return { error, errorMessage, handleOnChange, handleOnBlur };
+  return {
+    error: validation.error,
+    errorMessage: validation.message,
+    handleOnChange,
+    handleOnBlur,
+  };
 }
 
 export default useValidatedNumberInput;
