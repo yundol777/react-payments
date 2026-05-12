@@ -1,5 +1,5 @@
 import type { CardFormTypes } from '../types/card';
-import { getCardNumberPattern } from './cardBrand';
+import { CARD_BRAND_NAMES, getCardNumberInfo } from './cardBrand';
 
 interface ErrorResponse {
   error: boolean;
@@ -15,15 +15,19 @@ export function isExactLength(value: string, length: number): boolean {
 }
 
 export function getCardNumberError(cardNumber: string): ErrorResponse {
-  const expectedLength = getCardNumberPattern(cardNumber).reduce(
-    (sum, length) => sum + length,
-    0,
-  );
+  const { brand, maxLength } = getCardNumberInfo(cardNumber);
 
-  if (!isExactLength(cardNumber, expectedLength)) {
+  if (!brand) {
     return {
       error: true,
-      message: `카드번호는 ${expectedLength}자리를 입력해주세요.`,
+      message: '유효한 카드 정보가 없습니다.',
+    };
+  }
+
+  if (!isExactLength(cardNumber, maxLength)) {
+    return {
+      error: true,
+      message: `${CARD_BRAND_NAMES[brand]}의 번호는 ${maxLength}자리를 입력해주세요.`,
     };
   }
 

@@ -2,10 +2,7 @@ import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
 import useFormattedInputCursor from '../../../hooks/useFormattedInputCursor';
 import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
-import {
-  formatCardNumberByPattern,
-  getCardNumberPattern,
-} from '../../../utils/cardBrand';
+import { getCardNumberInfo } from '../../../utils/cardBrand';
 import { getCardNumberError } from '../../../utils/validation';
 
 interface Props {
@@ -14,12 +11,7 @@ interface Props {
 }
 
 export default function CardNumberSection({ value, updateValue }: Props) {
-  const pattern = getCardNumberPattern(value);
-  const maxLength = pattern.reduce((sum, length) => sum + length, 0);
-  const formattedMaxLength = maxLength + pattern.length - 1;
-  const formattedValue = formatCardNumberByPattern(value, pattern)
-    .filter(Boolean)
-    .join(' ');
+  const { formattedMaxLength, formattedValue } = getCardNumberInfo(value);
 
   const { inputRef, rememberCursorPosition } =
     useFormattedInputCursor(formattedValue);

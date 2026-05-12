@@ -16,6 +16,14 @@ export const CARD_NUMBER_PATTERNS: Record<Exclude<CardBrand, ''>, number[]> = {
   UnionPay: [4, 4, 4, 4],
 };
 
+export const CARD_BRAND_NAMES: Record<Exclude<CardBrand, ''>, string> = {
+  Visa: '비자 카드',
+  MasterCard: '마스터 카드',
+  Diners: '다이너스 카드',
+  AMEX: '아멕스 카드',
+  UnionPay: '유니온페이 카드',
+};
+
 export function getCardBrand(cardNumber: string): CardBrand {
   const firstTwoDigits = Number(cardNumber.slice(0, 2));
   const firstThreeDigits = Number(cardNumber.slice(0, 3));
@@ -76,4 +84,21 @@ export function formatCardNumberByPattern(
     startIndex += length;
     return slicedValue;
   });
+}
+
+export function getCardNumberInfo(cardNumber: string) {
+  const brand = getCardBrand(cardNumber);
+  const pattern = getCardNumberPattern(cardNumber);
+  const maxLength = pattern.reduce((sum, length) => sum + length, 0);
+  const groups = formatCardNumberByPattern(cardNumber, pattern);
+  const formattedValue = groups.filter(Boolean).join(' ');
+
+  return {
+    brand,
+    pattern,
+    groups,
+    maxLength,
+    formattedMaxLength: maxLength + pattern.length - 1,
+    formattedValue,
+  };
 }
