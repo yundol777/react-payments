@@ -25,7 +25,7 @@ export default function CardPreview({
   expirationDate,
   cardIssuer,
 }: Props) {
-  const { groups } = getCardNumberInfo(cardNumber);
+  const { groups, brand } = getCardNumberInfo(cardNumber);
   const backgroundColor = cardIssuer
     ? CARD_ISSUER_COLORS[cardIssuer]
     : DEFAULT_CARD_COLOR;
@@ -34,7 +34,7 @@ export default function CardPreview({
     <CardContainer backgroundColor={backgroundColor}>
       <CardHeader>
         <CardChip />
-        <CardBrandImage cardNumber={cardNumber} />
+        <CardBrandImage cardBrand={brand} />
       </CardHeader>
       <CardNumber>
         {groups.map((number, index) => (

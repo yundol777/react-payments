@@ -1,14 +1,14 @@
-import { CARD_BRAND_IMAGES } from '../../../constants/cardBrand';
-import { getCardBrand } from '../../../utils/cardBrand';
+import {
+  CARD_BRAND_IMAGES,
+  type CardBrand,
+} from '../../../constants/cardBrand';
 import { EmptyImg, StyledImg } from './CardBrandImage.styles';
 
 interface Props {
-  cardNumber: string;
+  cardBrand: CardBrand | '';
 }
 
-export default function CardBrandImage({ cardNumber }: Props) {
-  const cardBrand = getCardBrand(cardNumber);
-
+export default function CardBrandImage({ cardBrand }: Props) {
   if (!cardBrand) {
     return <EmptyImg />;
   }
