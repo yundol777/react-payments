@@ -1,6 +1,7 @@
 import PasswordInput from './PasswordInput/PasswordInput';
 import CommonSection from '../../../common/CommonSection/CommonSection';
-import usePassword from '../../../hooks/usePassword';
+import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
+import { getCardPasswordError } from '../../../utils/validation';
 
 interface Props {
   value: string;
@@ -8,10 +9,13 @@ interface Props {
 }
 
 function CardPasswordSection({ value, updateValue }: Props) {
-  const { error, errorMessage, handleOnChange, handleOnBlur } = usePassword({
-    value,
-    updateValue,
-  });
+  const { error, errorMessage, handleOnChange, handleOnBlur } =
+    useValidatedNumberInput({
+      value,
+      updateValue,
+      validate: getCardPasswordError,
+      invalidMessage: '비밀번호는 숫자만 입력 가능합니다.',
+    });
 
   return (
     <CommonSection

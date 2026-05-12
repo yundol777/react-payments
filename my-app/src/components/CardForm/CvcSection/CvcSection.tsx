@@ -1,6 +1,7 @@
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
-import useCvc from '../../../hooks/useCvc';
+import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
+import { getCardCvcError } from '../../../utils/validation';
 
 interface Props {
   value: string;
@@ -8,10 +9,13 @@ interface Props {
 }
 
 export default function CvcSection({ value, updateValue }: Props) {
-  const { error, errorMessage, handleOnChange, handleOnBlur } = useCvc({
-    value,
-    updateValue,
-  });
+  const { error, errorMessage, handleOnChange, handleOnBlur } =
+    useValidatedNumberInput({
+      value,
+      updateValue,
+      validate: getCardCvcError,
+      invalidMessage: 'CVC는 숫자만 입력 가능합니다.',
+    });
 
   return (
     <CommonSection
