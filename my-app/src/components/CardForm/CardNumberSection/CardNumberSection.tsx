@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
 import useFormattedInputCursor from '../../../hooks/useFormattedInputCursor';
@@ -11,7 +12,8 @@ interface Props {
 }
 
 export default function CardNumberSection({ value, updateValue }: Props) {
-  const { formattedMaxLength, formattedValue } = getCardNumberInfo(value);
+  const { formattedMaxLength, formattedValue, maxLength } =
+    getCardNumberInfo(value);
 
   const { inputRef, rememberCursorPosition } =
     useFormattedInputCursor(formattedValue);
@@ -23,6 +25,12 @@ export default function CardNumberSection({ value, updateValue }: Props) {
       validate: getCardNumberError,
       invalidMessage: '카드번호는 숫자만 입력 가능합니다.',
     });
+
+  useEffect(() => {
+    if (value.length === maxLength) {
+      inputRef.current?.blur();
+    }
+  }, [value, maxLength, inputRef]);
 
   return (
     <CommonSection
