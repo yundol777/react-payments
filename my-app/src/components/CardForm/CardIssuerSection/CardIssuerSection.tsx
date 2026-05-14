@@ -1,7 +1,7 @@
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import type { SelectedCardIssuer } from '../../../constants/cardIssuer';
 import useInitialFocus from '../../../hooks/useInitialFocus';
-import SelectInput from './SelectInput/SelectInput';
+import SelectInput from './CardIssuerSelect/CardIssuerSelect';
 
 interface Props {
   value: SelectedCardIssuer;

@@ -3,7 +3,7 @@ import {
   isCardIssuer,
   type SelectedCardIssuer,
 } from '../../../../constants/cardIssuer';
-import { StyledOption, StyledSelect } from './SelectInput.styles';
+import { StyledOption, StyledSelect } from './CardIssuerSelect.styles';
 
 interface Props {
   value: SelectedCardIssuer;
@@ -11,7 +11,7 @@ interface Props {
   inputRef?: React.Ref<HTMLSelectElement>;
 }
 
-function SelectInput({ value, onChange, inputRef }: Props) {
+function CardIssuerSelect({ value, onChange, inputRef }: Props) {
   return (
     <StyledSelect
       ref={inputRef}
@@ -35,4 +35,4 @@ function SelectInput({ value, onChange, inputRef }: Props) {
   );
 }
 
-export default SelectInput;
+export default CardIssuerSelect;
