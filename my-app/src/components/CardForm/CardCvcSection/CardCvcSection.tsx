@@ -10,7 +10,7 @@ interface Props {
   updateValue: (value: string) => void;
 }
 
-export default function CvcSection({ value, updateValue }: Props) {
+export default function CardCvcSection({ value, updateValue }: Props) {
   const inputRef = useInitialFocus<HTMLInputElement>();
 
   const { error, errorMessage, handleOnChange, handleOnBlur } =

@@ -13,7 +13,10 @@ interface Props {
   updateValue: (value: { month: string; year: string }) => void;
 }
 
-export default function ExpirationDateSection({ value, updateValue }: Props) {
+export default function CardExpirationDateSection({
+  value,
+  updateValue,
+}: Props) {
   const monthInputRef = useInitialFocus<HTMLInputElement>();
   const yearInputRef = useRef<HTMLInputElement>(null);
 
