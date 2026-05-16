@@ -1,0 +1,54 @@
+import { useState } from 'react';
+
+interface ValidationResult {
+  error: boolean;
+  message: string;
+}
+
+interface Props {
+  value: string;
+  updateValue: (value: string) => void;
+  validate: (value: string) => ValidationResult;
+  invalidMessage: string;
+}
+
+function useValidatedNumberInput({
+  value,
+  updateValue,
+  validate,
+  invalidMessage,
+}: Props) {
+  const [validation, setValidation] = useState<ValidationResult>({
+    error: false,
+    message: '',
+  });
+
+  function handleOnChange(inputValue: string) {
+    if (!/^[0-9]*$/.test(inputValue)) {
+      setValidation({
+        error: true,
+        message: invalidMessage,
+      });
+      return;
+    }
+
+    updateValue(inputValue);
+    setValidation({
+      error: false,
+      message: '',
+    });
+  }
+
+  function handleOnBlur() {
+    setValidation(validate(value));
+  }
+
+  return {
+    error: validation.error,
+    errorMessage: validation.message,
+    handleOnChange,
+    handleOnBlur,
+  };
+}
+
+export default useValidatedNumberInput;

@@ -1,0 +1,30 @@
+export const CARD_ISSUERS = [
+  'BC카드',
+  '신한카드',
+  '카카오뱅크',
+  '현대카드',
+  '우리카드',
+  '롯데카드',
+  '하나카드',
+  '국민카드',
+] as const;
+
+export type CardIssuer = (typeof CARD_ISSUERS)[number];
+export type SelectedCardIssuer = CardIssuer | '';
+
+export const DEFAULT_CARD_COLOR = '#333333';
+
+export const CARD_ISSUER_COLORS: Record<CardIssuer, string> = {
+  BC카드: '#F04651',
+  신한카드: '#0046FF',
+  카카오뱅크: '#FFE600',
+  현대카드: '#000000',
+  우리카드: '#007BC8',
+  롯데카드: '#ED1C24',
+  하나카드: '#009490',
+  국민카드: '#6A6056',
+};
+
+export function isCardIssuer(value: string): value is CardIssuer {
+  return CARD_ISSUERS.includes(value as CardIssuer);
+}
