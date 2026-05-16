@@ -24,4 +24,13 @@ const router = createBrowserRouter(
 
 const root = document.getElementById('root');
 
-createRoot(root!).render(<RouterProvider router={router} />);
+// 서비스 워커 등록 (등록 이후에 실행되야 하므로 비동기 처리)
+async function enableMocking() {
+  const { worker } = await import('./mocks/browser');
+
+  return worker.start();
+}
+
+enableMocking().then(() => {
+  createRoot(root!).render(<RouterProvider router={router} />);
+});
