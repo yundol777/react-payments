@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import CardListItem from './CardListItem';
 
 const meta: Meta<typeof CardListItem> = {
-  title: 'Components/CardListItem',
+  title: 'Components/CardListContainer/CardListItem',
   component: CardListItem,
 };
 

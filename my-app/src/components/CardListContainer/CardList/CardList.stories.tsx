@@ -3,7 +3,7 @@ import { cards } from '../../../mocks/mockDB';
 import CardList from './CardList';
 
 const meta: Meta<typeof CardList> = {
-  title: 'Components/CardList',
+  title: 'Components/CardListContainer/CardList',
   component: CardList,
 };
 
