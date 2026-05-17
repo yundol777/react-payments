@@ -10,6 +10,8 @@ import {
 import AddCardPage from './pages/AddCardPage/AddCardPage.tsx';
 import SuccessPage from './pages/SuccessPage/SuccessPage.tsx';
 
+const BASENAME = '/react-payments/';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -18,7 +20,7 @@ const router = createBrowserRouter(
     </Route>,
   ),
   {
-    basename: '/react-payments/',
+    basename: BASENAME,
   },
 );
 
@@ -28,7 +30,11 @@ const root = document.getElementById('root');
 async function enableMocking() {
   const { worker } = await import('./mocks/browser');
 
-  return worker.start();
+  return worker.start({
+    serviceWorker: {
+      url: `${BASENAME}mockServiceWorker.js`,
+    },
+  });
 }
 
 enableMocking().then(() => {
