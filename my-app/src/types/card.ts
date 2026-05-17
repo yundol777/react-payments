@@ -1,8 +1,8 @@
-import type { SelectedCardIssuer } from '../constants/cardIssuer';
+import type { SelectedCardIssuerCode } from '../constants/cardIssuer';
 
 export interface CardFormTypes {
   cardNumber: string;
-  cardIssuer: SelectedCardIssuer;
+  cardIssuer: SelectedCardIssuerCode;
   cardExpirationDate: {
     month: string;
     year: string;
