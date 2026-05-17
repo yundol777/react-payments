@@ -2,11 +2,11 @@ import { StyledButton } from './CommonButton.styles';
 
 interface Props {
   handleOnClick: () => void;
-  children: string;
+  label: string;
 }
 
-function CommonButton({ handleOnClick, children }: Props) {
-  return <StyledButton onClick={handleOnClick}>{children}</StyledButton>;
+function CommonButton({ handleOnClick, label }: Props) {
+  return <StyledButton onClick={handleOnClick}>{label}</StyledButton>;
 }
 
 export default CommonButton;

@@ -16,7 +16,7 @@ function CardListEmpty() {
       <EmptyDescription>
         아래 버튼을 눌러 첫 카드를 등록해보세요
       </EmptyDescription>
-      <CommonButton handleOnClick={handleOnClick}>카드 추가하기</CommonButton>
+      <CommonButton handleOnClick={handleOnClick} label="카드 추가하기" />
     </EmptyListContainer>
   );
 }

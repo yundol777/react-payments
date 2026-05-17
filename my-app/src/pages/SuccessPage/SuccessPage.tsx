@@ -19,7 +19,7 @@ function SuccessPage() {
         <br />
         {location.state.issuer}가 등록되었어요.
       </StyledText>
-      <CommonButton handleOnClick={handleOnClick}>확인</CommonButton>
+      <CommonButton handleOnClick={handleOnClick} label="확인" />
     </StyledContainer>
   );
 }

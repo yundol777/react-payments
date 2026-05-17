@@ -14,7 +14,7 @@ function CardListError() {
       <ErrorIcon src={ErrorIconImg} alt="error-icon" />
       <ErrorTitle>카드 목록을 불러올 수 없어요</ErrorTitle>
       <ErrorDescription>잠시 후 다시 시도해 주세요.</ErrorDescription>
-      <CommonButton handleOnClick={handleOnClick}>다시 시도</CommonButton>
+      <CommonButton handleOnClick={handleOnClick} label="다시 시도" />
     </ErrorListContainer>
   );
 }
