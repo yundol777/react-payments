@@ -1,7 +1,7 @@
 import {
   DEFAULT_CARD_COLOR,
   getCardIssuerByCode,
-} from '../../../constants/cardIssuer';
+} from '../../../../constants/cardIssuer';
 import {
   CardColorPreview,
   CardInfo,
@@ -11,7 +11,7 @@ import {
   ExpirationDate,
   IssuerName,
 } from './CardListItem.styles';
-import DeleteIcon from '../../../assets/DeleteIcon.png';
+import DeleteIcon from '../../../../assets/DeleteIcon.png';
 
 interface Props {
   card: {
