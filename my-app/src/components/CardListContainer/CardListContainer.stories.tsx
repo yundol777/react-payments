@@ -17,7 +17,7 @@ type Story = StoryObj<typeof CardListContainer>;
 export const List: Story = {
   args: {
     itemCount: cards.length,
-    children: <CardList cardList={cards} />,
+    children: <CardList cardList={cards} onRefresh={() => {}} />,
   },
 };
 
@@ -38,6 +38,6 @@ export const Loading: Story = {
 export const Error: Story = {
   args: {
     itemCount: null,
-    children: <CardListError />,
+    children: <CardListError onRetry={() => {}} />,
   },
 };

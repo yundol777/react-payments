@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const EmptyListContainer = styled.div`
+  height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;

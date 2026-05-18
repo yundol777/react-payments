@@ -11,7 +11,7 @@ function CardListEmpty() {
   const navigate = useNavigate();
 
   function handleOnClick() {
-    navigate(0);
+    navigate('/add');
   }
 
   return (

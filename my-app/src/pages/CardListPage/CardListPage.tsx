@@ -12,7 +12,7 @@ function CardListPage() {
   return (
     <CardListContainer itemCount={itemCount}>
       {status === 'loading' && <CardListLoading />}
-      {status === 'error' && <CardListError />}
+      {status === 'error' && <CardListError onRetry={refetchList} />}
       {status === 'success' && isEmpty && <CardListEmpty />}
       {status === 'success' && !isEmpty && (
         <CardList cardList={data} onRefresh={refetchList} />

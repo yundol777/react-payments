@@ -6,13 +6,14 @@ import {
   ErrorListContainer,
   ErrorTitle,
 } from './CardListError.styles';
-import { useNavigate } from 'react-router';
 
-function CardListError() {
-  const navigate = useNavigate();
+interface Props {
+  onRetry: () => void;
+}
 
+function CardListError({ onRetry }: Props) {
   function handleOnClick() {
-    navigate('/');
+    onRetry();
   }
 
   return (
