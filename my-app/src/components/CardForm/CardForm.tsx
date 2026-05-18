@@ -31,7 +31,6 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
-      {step >= FORM_STEP.SUBMIT && <SubmitButtonSection cardForm={cardForm} />}
       {step >= FORM_STEP.PASSWORD && (
         <CardPasswordSection
           value={cardForm.cardPassword}
@@ -95,6 +94,7 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
           }}
         />
       )}
+      {step >= FORM_STEP.SUBMIT && <SubmitButtonSection cardForm={cardForm} />}
     </StyledForm>
   );
 }
