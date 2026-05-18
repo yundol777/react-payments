@@ -14,3 +14,13 @@ export async function getCardList() {
 
   return (await response.json()) as Card[];
 }
+
+export async function deleteCardItem(id: string) {
+  const response = await fetch(`https://api.example.com/cards/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('카드 삭제 요청 실패');
+  }
+}

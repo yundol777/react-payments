@@ -11,9 +11,10 @@ interface Card {
 
 type CardListStatus = 'idle' | 'loading' | 'success' | 'error';
 
-function useCardListQuery() {
+function useGetCardList() {
   const [status, setStatus] = useState<CardListStatus>('idle');
   const [data, setData] = useState<Card[]>([]);
+  const [refetchTrigger, setRefetchTrigger] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchCardList() {
@@ -31,13 +32,16 @@ function useCardListQuery() {
     }
 
     fetchCardList();
-  }, []);
+  }, [refetchTrigger]);
 
   return {
     status,
     data,
     itemCount: status === 'success' && data.length !== 0 ? data.length : null,
+    refetchList: () => {
+      setRefetchTrigger((prev) => !prev);
+    },
   };
 }
 
-export default useCardListQuery;
+export default useGetCardList;

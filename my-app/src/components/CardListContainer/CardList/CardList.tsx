@@ -1,6 +1,7 @@
 import AddCardButton from './AddCardButton/AddCardButton';
 import CardListItem from './CardListItem/CardListItem';
 import { CardListContainer } from './CardList.styles';
+import { deleteCardItem } from '../../../apis/card';
 
 interface Props {
   cardList: {
@@ -9,13 +10,23 @@ interface Props {
     number: string;
     expirationDate: string;
   }[];
+  onRefresh: () => void;
 }
 
-function CardList({ cardList }: Props) {
+function CardList({ cardList, onRefresh }: Props) {
+  async function handleDelete(cardId: string) {
+    try {
+      await deleteCardItem(cardId);
+      onRefresh();
+    } catch {
+      alert('카드 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  }
+
   return (
     <CardListContainer>
       {cardList.map((card) => (
-        <CardListItem key={card.id} card={card} />
+        <CardListItem key={card.id} card={card} onDelete={handleDelete} />
       ))}
       <AddCardButton />
     </CardListContainer>

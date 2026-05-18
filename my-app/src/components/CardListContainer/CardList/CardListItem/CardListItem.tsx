@@ -21,16 +21,27 @@ interface Props {
     number: string;
     expirationDate: string;
   };
+  onDelete: (cardId: string) => void;
 }
 
-function CardListItem({ card }: Props) {
+function CardListItem({ card, onDelete }: Props) {
   const issuer = getCardIssuerByCode(card.issuerCode);
 
   const backgroundColor = issuer?.color ?? DEFAULT_CARD_COLOR;
   const issuerName = issuer?.name ?? '알 수 없는 카드사';
   const { formattedValue } = getCardNumberInfo(card.number);
 
-  function handleOnClick() {}
+  function handleOnClick() {
+    if (
+      !window.confirm(
+        `${issuerName}(${card.number.slice(-4)})를 삭제하시겠습니까?`,
+      )
+    ) {
+      return;
+    }
+
+    onDelete(card.id);
+  }
 
   return (
     <CardListItemContainer>
