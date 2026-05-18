@@ -11,7 +11,12 @@ function isExpired(expirationDate: string) {
   const currentMonth = now.getMonth() + 1;
   const currentYear = now.getFullYear() % 100;
 
-  return year < currentYear || (year === currentYear && month < currentMonth);
+  return (
+    month < 1 ||
+    month > 12 ||
+    year < currentYear ||
+    (year === currentYear && month < currentMonth)
+  );
 }
 
 export const handlers = [
