@@ -12,6 +12,7 @@ import {
   IssuerName,
 } from './CardListItem.styles';
 import DeleteIcon from '../../../../assets/DeleteIcon.png';
+import { getCardNumberInfo } from '../../../../utils/cardBrand';
 
 interface Props {
   card: {
@@ -25,8 +26,9 @@ interface Props {
 function CardListItem({ card }: Props) {
   const issuer = getCardIssuerByCode(card.issuerCode);
 
-  const issuerName = issuer?.name ?? '알 수 없는 카드사';
   const backgroundColor = issuer?.color ?? DEFAULT_CARD_COLOR;
+  const issuerName = issuer?.name ?? '알 수 없는 카드사';
+  const { formattedValue } = getCardNumberInfo(card.number);
 
   function handleOnClick() {}
 
@@ -35,7 +37,7 @@ function CardListItem({ card }: Props) {
       <CardColorPreview backgroundColor={backgroundColor} />
       <CardInfo>
         <IssuerName>{issuerName}</IssuerName>
-        <CardNumber>{card.number}</CardNumber>
+        <CardNumber>{formattedValue}</CardNumber>
         <ExpirationDate>유효기간 {card.expirationDate}</ExpirationDate>
       </CardInfo>
       <DeleteButton onClick={handleOnClick}>
