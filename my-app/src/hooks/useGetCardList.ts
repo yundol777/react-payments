@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react';
 import { delay } from '../utils/delay';
 import { getCardList } from '../apis/card';
-
-interface Card {
-  id: string;
-  issuerCode: string;
-  number: string;
-  expirationDate: string;
-}
+import type { GetCardListResponse } from '../types/card';
 
 type CardListStatus = 'idle' | 'loading' | 'success' | 'error';
 
 function useGetCardList() {
   const [status, setStatus] = useState<CardListStatus>('idle');
-  const [data, setData] = useState<Card[]>([]);
+  const [data, setData] = useState<GetCardListResponse>([]);
   const [refetchTrigger, setRefetchTrigger] = useState<boolean>(false);
 
   useEffect(() => {
