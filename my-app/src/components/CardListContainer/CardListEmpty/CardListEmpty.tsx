@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import CommonButton from '../../../common/CommonButton/CommonButton';
 import {
   EmptyCardPreview,
@@ -7,7 +8,11 @@ import {
 } from './CardListEmpty.styles';
 
 function CardListEmpty() {
-  function handleOnClick() {}
+  const navigate = useNavigate();
+
+  function handleOnClick() {
+    navigate(0);
+  }
 
   return (
     <EmptyListContainer>

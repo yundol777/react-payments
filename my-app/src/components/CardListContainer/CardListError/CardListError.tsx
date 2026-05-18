@@ -6,9 +6,15 @@ import {
   ErrorListContainer,
   ErrorTitle,
 } from './CardListError.styles';
+import { useNavigate } from 'react-router';
 
 function CardListError() {
-  function handleOnClick() {}
+  const navigate = useNavigate();
+
+  function handleOnClick() {
+    navigate('/');
+  }
+
   return (
     <ErrorListContainer>
       <ErrorIcon src={ErrorIconImg} alt="error-icon" />

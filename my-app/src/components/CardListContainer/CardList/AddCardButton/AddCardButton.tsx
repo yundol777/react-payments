@@ -1,7 +1,12 @@
+import { useNavigate } from 'react-router';
 import { StyledButton } from './AddCardButton.styles';
 
 function AddCardButton() {
-  function handleOnClick() {}
+  const navigate = useNavigate();
+
+  function handleOnClick() {
+    navigate('/add');
+  }
 
   return <StyledButton onClick={handleOnClick}>+ 카드 추가</StyledButton>;
 }
