@@ -16,6 +16,10 @@ import {
   getCardPasswordError,
   getCardYearError,
 } from '../../utils/validation';
+import type {
+  CardServerErrorField,
+  CardServerErrors,
+} from '../../constants/serverError';
 
 interface Props {
   cardForm: CardFormTypes;
@@ -24,9 +28,17 @@ interface Props {
     value: CardFormTypes[K],
   ) => void;
   handleOnSubmit: (e: React.SubmitEvent) => void;
+  serverErrors: CardServerErrors;
+  clearServerError: (field: CardServerErrorField) => void;
 }
 
-function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
+function CardForm({
+  cardForm,
+  updateCardForm,
+  handleOnSubmit,
+  serverErrors,
+  clearServerError,
+}: Props) {
   const { step, openStep } = useFormStep();
 
   return (
@@ -46,7 +58,9 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= FORM_STEP.CVC && (
         <CvcSection
           value={cardForm.cardCvc}
+          serverErrorMessage={serverErrors.cardCvc}
           updateValue={(value) => {
+            clearServerError('cardCvc');
             updateCardForm('cardCvc', value);
 
             if (!getCardCvcError(value).error) {
@@ -58,7 +72,9 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= FORM_STEP.EXPIRATION_DATE && (
         <ExpirationDateSection
           value={cardForm.cardExpirationDate}
+          serverErrorMessage={serverErrors.cardExpirationDate}
           updateValue={(value) => {
+            clearServerError('cardExpirationDate');
             updateCardForm('cardExpirationDate', value);
 
             if (
@@ -85,7 +101,9 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= FORM_STEP.CARD_NUMBER && (
         <CardNumberSection
           value={cardForm.cardNumber}
+          serverErrorMessage={serverErrors.cardNumber}
           updateValue={(value) => {
+            clearServerError('cardNumber');
             updateCardForm('cardNumber', value);
 
             if (!getCardNumberError(value).error) {

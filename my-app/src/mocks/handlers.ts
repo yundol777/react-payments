@@ -1,20 +1,24 @@
 import { http, HttpResponse } from 'msw';
 import { cards, maskCardNumber } from './mockDB';
-
-interface CreateCardRequest {
-  number: string;
-  expirationDate: string;
-  cvc: string;
-  issuerCode: string;
-}
+import { getCardBrand } from '../utils/cardBrand';
+import type { CreateCardRequest } from '../types/card';
 
 const BASE_URL = 'https://api.example.com';
+
+function isExpired(expirationDate: string) {
+  const [month, year] = expirationDate.split('/').map(Number);
+  const now = new Date();
+  const currentMonth = now.getMonth() + 1;
+  const currentYear = now.getFullYear() % 100;
+
+  return year < currentYear || (year === currentYear && month < currentMonth);
+}
 
 export const handlers = [
   http.post(`${BASE_URL}/cards`, async ({ request }) => {
     const body = (await request.json()) as CreateCardRequest;
 
-    if (body.number === '9999123456789012') {
+    if (!getCardBrand(body.number)) {
       return HttpResponse.json(
         {
           code: 'INVALID_CARD_NUMBER',
@@ -24,7 +28,7 @@ export const handlers = [
       );
     }
 
-    if (body.number === '4111111111111111' && body.cvc === '000') {
+    if (body.cvc === '000') {
       return HttpResponse.json(
         {
           code: 'INVALID_CVC',
@@ -34,11 +38,11 @@ export const handlers = [
       );
     }
 
-    if (body.number === '5511123456789012' && body.expirationDate === '13/28') {
+    if (isExpired(body.expirationDate)) {
       return HttpResponse.json(
         {
           code: 'INVALID_EXPIRATION_DATE',
-          message: '유효하지 않은 만료일입니다.',
+          message: '만료일이 지난 카드입니다.',
         },
         { status: 400 },
       );
