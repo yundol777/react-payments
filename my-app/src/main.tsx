@@ -9,13 +9,15 @@ import {
 } from 'react-router';
 import AddCardPage from './pages/AddCardPage/AddCardPage.tsx';
 import SuccessPage from './pages/SuccessPage/SuccessPage.tsx';
+import CardListPage from './pages/CardListPage/CardListPage.tsx';
 
 const BASENAME = '/react-payments/';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<AddCardPage />} />
+      <Route index element={<CardListPage />} />
+      <Route path="add" element={<AddCardPage />} />
       <Route path="success" element={<SuccessPage />} />
     </Route>,
   ),
